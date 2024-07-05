@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <header>
+        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
+    <main>
+        <section id="login" class="card-container2">
+    <div class="card2 login-container2">
+        <h2>Login to Your Account</h2>
+        <form id="login-form">
+            <div class="input-container">
+                <label for="username">E-Mail or Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" id="login-btn">Login</button>
+            </div>
+        </form>
+        <p>Don't have an account? <a href="register.html">Register Here</a></p>
+    </div>
+</section>
+    </main>
+    <section id="footerprint">
+        <p>Thanks for choosing Blacnova's Forge!</p>
+    </section>
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script>
+        function redirectToHome() {
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>

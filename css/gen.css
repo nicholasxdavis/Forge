@@ -1,0 +1,121 @@
+:root {
+    --background-light: #f0f5f9;
+    --background-dark: #2c3e50;
+    --text-light: #333333;
+    --text-dark: #ffffff;
+    --primary-color: #3498db;
+    --primary-hover: #2980b9;
+    --secondary-color: #9b59b6;
+    --secondary-color-dark: #9b59b6;
+    --card-background-light: #ffffff;
+    --card-background-dark: #34495e;
+    --card-shadow-light: rgba(0, 0, 0, 0.1);
+    --card-shadow-dark: rgba(0, 0, 0, 0.5);
+    --link-color: #3498db; /* Add this line */
+    --link-hover-color: #2980b9; /* Add this line */
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%; /* Adjust as necessary */
+}
+.card {
+    position: relative;
+    background-color: var(--card-background-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--card-shadow-light);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+    text-align: center;
+}
+.card a {
+    color: var(--link-color);
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.card a:hover {
+    color: var(--link-hover-color);
+}
+
+body.dark-mode .card {
+    background-color: var(--card-background-dark);
+    box-shadow: 0 4px 8px var(--card-shadow-dark);
+}
+
+body.dark-mode .card:hover {
+    box-shadow: 0 8px 16px var(--card-shadow-dark);
+}
+
+.input-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem; /* Added margin-top to create space from the top */
+}
+
+.input-container label {
+    margin-right: 0.5rem; /* Space between label and input */
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.input-container input {
+    padding: 0.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-light);
+    background-color: var(--background-light);
+    width: 100%;
+    max-width: 30px;
+}
+
+body.dark-mode .input-container input {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+body.dark-mode .input-container label {
+    color: var(--text-dark);
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.button-container button {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.25rem 0.75rem; /* Reduced padding for smaller buttons */
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 150px; /* Adjusted max-width for smaller buttons */
+    text-align: center;
+    margin: 0 0.5rem; /* Added margin to space out buttons if there are multiple */
+}
+
+.button-container button:hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode .button-container button {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+}
+
+body.dark-mode .button-container button:hover {
+    background-color: var(--primary-hover);
+}
