@@ -122,22 +122,71 @@ body.dark-mode .button-container button:hover {
 }
 /* Add additional styles to style the color palettes */
 /* Add additional styles to style the color palettes */
-.palette {
+.quote {
+    font-size: 1.2em;
+    font-style: italic;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 5px solid #ccc;
+}
+
+#quote-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+@media (max-width: 800px) {
+    .palette {
+    justify-content: center;
     display: flex;
     margin-bottom: 20px;
+    opacity: 1;
+    max-width: 400px;
 }
 
 .color {
     flex: 1;
-    height: 100px; /* Increase height for better visibility */
-    width: 100px;
+    max-height: 50px;
+    max-width: 50px; /* Increased width to accommodate space on the right */
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
     transition: transform 0.2s;
-    border: 1px solid #000; /* Add border to color blocks */
+    border: none;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px; /* Padding inside the block */
+    margin-right: 15px; /* Margin to the right of the block */
+    margin-bottom: 15px; /* Margin to the right of the block */
+}
+    }
+.palette {
+    display: flex;
+    margin-bottom: 20px;
+    opacity: 1;
+}
+
+.color {
+    flex: 1;
+    height: 100px;
+    width: 100px; /* Increased width to accommodate space on the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.2s;
+    border: none;
+    border-radius: 10px;
+    background-color: #4CAF50;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px; /* Padding inside the block */
+    margin-right: 15px; /* Margin to the right of the block */
+    margin-bottom: 15px; /* Margin to the right of the block */
 }
 
 .color:hover {
@@ -157,20 +206,6 @@ body.dark-mode .button-container button:hover {
 
 .color:hover .color-code {
     display: block;
-}
-.quote {
-    font-size: 1.2em;
-    font-style: italic;
-    margin: 10px 0;
-    padding: 10px;
-    border-left: 5px solid #ccc;
-}
-
-#quote-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
 }
 .recipe {
     font-size: 1.2em;

@@ -40,6 +40,7 @@
             width: 80px;
         }
 #list-title-input {
+    max-width: 500px;
     font-size: 24px;
     margin-right: 10px;
     border: 1px solid #ddd;
@@ -47,6 +48,28 @@
     padding: 5px;
     flex: 1;
     height: 30px; /* Ensure the input field height is specified */
+}
+@media (max-width: 1000px) {
+#save-title {
+    background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 100%;
+            width: 64px;
+        }
+        #list-title-input {
+    max-width: 281px;
+    font-size: 24px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    flex: 1;
+    height: 30px; /* Ensure the input field height is specified */
+}
 }
         #save-title:hover {
             background-color: #2980b9;
@@ -123,7 +146,7 @@
         }
         
         .todo-item .check-icon {
-            margin-left: 440px;
+
         }
         
         .todo-item .check-icon:hover {
@@ -258,11 +281,13 @@
                         todoItem.classList.add('checked');
                     }
                     todoItem.innerHTML = `
-                        <span>${task.text}</span>
-                        ${task.time ? `<span class="todo-time">${task.formattedTime}</span>` : ''}
-                        <i class="fas fa-check check-icon"></i>
-                        <i class="fas fa-trash-alt trash-icon"></i>
-                    `;
+            <span>${task.text}</span>
+            ${task.time ? `<span class="todo-time">${task.formattedTime}</span>` : ''}
+            <div class="icons-container">
+                <i class="fas fa-check check-icon"></i>
+                <i class="fas fa-trash-alt trash-icon"></i>
+            </div>
+        `;
 
                     todoItem.querySelector('.check-icon').addEventListener('click', () => {
                         todoItem.classList.toggle('checked');
