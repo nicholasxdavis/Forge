@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate Random Names</title>
+    <title>Generate Random Recipes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
@@ -18,35 +18,32 @@
     <main>
         <section id="introduction">
             <div class="intro-container">
-                <h2>Generate Random Names</h2>
-                <p>Generate random names for various purposes.</p>
+                <h2>Generate Random Recipes</h2>
+                <p>Generate random delicious and healthy recipes.</p>
                 <div class="button-container">
                     <button id="regenerate-btn">Regenerate</button>
-                    <button id="save-btn">Save</button>
                 </div>
                 <div class="input-container">
-                    <label for="gender-select">Gender:</label>
-                    <select id="gender-select" name="gender-select">
+                    <label for="recipe-count">Number of recipes:</label>
+                    <input type="number" id="recipe-count" name="recipe-count" min="1" max="10" value="3">
+                </div>
+                <div class="input-container">
+                    <label for="recipe-category">Recipe Category:</label>
+                    <select id="recipe-category" name="recipe-category">
                         <option value="all">All</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Beef">Beef</option>
+                        <option value="Chicken">Chicken</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Pasta">Pasta</option>
+                        <option value="Seafood">Seafood</option>
+                        <!-- Add more categories as needed -->
                     </select>
-                </div>
-                <div class="input-container">
-                    <label for="name-count">Number of generations:</label>
-                    <input type="number" id="name-count" name="name-count" min="1" max="100" value="5">
                 </div>
             </div>
         </section>
         <section id="gen">
-            <p>Hi, Hello!<br>
-                Hi, Hello!<br>
-                Hi, Hello!<br>
-                Hi, Hello!<br>
-                Hi, Hello!<br></p>
+            <div id="recipe-container"></div>
         </section>
-        <div id="gen" style="display: none;"></div>
-        <div id="map" style="display: none; width: 100%; height: 500px;"></div>
     </main>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
@@ -55,7 +52,7 @@
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
     </footer>
     <script src="js/script.js"></script>
-    <script src="js/names.js"></script>
+    <script src="js/recipes.js"></script>
     <script>
         function redirectToHome() {
             window.location.href = "home.html";

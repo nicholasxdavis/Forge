@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do Lists</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <style>
+        .todo-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--card-background-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .todo-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+        .rename-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 600px;
+            height: 40px;
+        }
+        #save-title {
+    background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 100%;
+            width: 80px;
+        }
+#list-title-input {
+    font-size: 24px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    flex: 1;
+    height: 30px; /* Ensure the input field height is specified */
+}
+        #save-title:hover {
+            background-color: #2980b9;
+        }
+        .todo-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #todo-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #todo-time {
+            width: 120px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #add-todo {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            width: 80px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #add-todo:hover {
+            background-color: #2980b9;
+        }
+        .todo-panel {
+            max-height: 400px;
+            overflow-y: auto;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        #todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #f8d7da; /* Red background for unchecked items */
+            color: #721c24; /* Darker text color for visibility */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+        
+        .todo-item.checked {
+            background-color: #d4edda; /* Light green background for checked items */
+            color: #155724; /* Darker text color for visibility */
+        }
+        
+        .todo-item .icons-container {
+            display: flex; /* Use flexbox to align icons next to each other */
+            gap: 10px; /* Space between icons */
+        }
+        
+        .todo-item .check-icon,
+        .todo-item .trash-icon {
+            color: #28a745; /* Green check icon color */
+            cursor: pointer;
+        }
+        
+        .todo-item .check-icon {
+            margin-left: 440px;
+        }
+        
+        .todo-item .check-icon:hover {
+            color: #218838;
+        }
+        
+        .todo-item .trash-icon {
+            color: #dc3545; /* Red trash icon color */
+        }
+        
+        .todo-item .trash-icon:hover {
+            color: #c82333;
+        }
+        
+        .todo-item .todo-time {
+            margin-left: 10px;
+        }
+        .list-container {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <div class="intro-container">
+                <h2>To-Do Lists</h2>
+                <p>Create and manage multiple to-do lists.</p>
+                <div class="button-container">
+        <button id="newlist-btn">New List</button>
+    </div>
+            </div>
+        </section>
+        <div class="todo-container">
+            <h1 id="list-title">To-Do List</h1>
+            <div class="rename-container">
+                <input type="text" id="list-title-input" value="To-Do List">
+                <button id="save-title">Save</button>
+            </div>
+            <div class="todo-input-container">
+                <input type="text" id="todo-input" placeholder="Enter a new task...">
+                <input type="time" id="todo-time">
+                <button id="add-todo"><i class="fas fa-plus"></i> Add</button>
+            </div>
+            <div class="todo-panel">
+                <ul id="todo-list"></ul>
+            </div>
+        </div>
+    </main>
+    <section id="footerprint">
+        <p>Thanks for choosing Blacnova's Forge!</p>
+    </section>
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+    </footer>
+    <script src="js/popups.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        function redirectToHome() {
+            window.location.href = "home.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const todoInput = document.getElementById('todo-input');
+            const todoTime = document.getElementById('todo-time');
+            const addTodoButton = document.getElementById('add-todo');
+            const todoList = document.getElementById('todo-list');
+            const listTitleInput = document.getElementById('list-title-input');
+            const saveTitleButton = document.getElementById('save-title');
+            const listTitle = document.getElementById('list-title');
+
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            let listTitleText = localStorage.getItem('listTitle') || 'To-Do List';
+
+            listTitleInput.value = listTitleText;
+            listTitle.textContent = listTitleText;
+
+            addTodoButton.addEventListener('click', addTodo);
+            todoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addTodo();
+            });
+
+            saveTitleButton.addEventListener('click', () => {
+                listTitleText = listTitleInput.value.trim();
+                if (listTitleText) {
+                    localStorage.setItem('listTitle', listTitleText);
+                    updateTitle();
+                }
+            });
+
+            function addTodo() {
+                const taskText = todoInput.value.trim();
+                const taskTime = todoTime.value;
+
+                if (taskText === '') return;
+
+                const formattedTime = formatTime(taskTime);
+
+                const task = {
+                    text: taskText,
+                    time: taskTime,
+                    formattedTime: formattedTime,
+                    checked: false
+                };
+
+                tasks.push(task);
+                saveTasks();
+                updateTodoList();
+                todoInput.value = '';
+                todoTime.value = '';
+            }
+
+            function updateTodoList() {
+                todoList.innerHTML = '';
+
+                tasks.sort((a, b) => a.time.localeCompare(b.time));
+
+                tasks.forEach(task => {
+                    const todoItem = document.createElement('li');
+                    todoItem.classList.add('todo-item');
+                    if (task.checked) {
+                        todoItem.classList.add('checked');
+                    }
+                    todoItem.innerHTML = `
+                        <span>${task.text}</span>
+                        ${task.time ? `<span class="todo-time">${task.formattedTime}</span>` : ''}
+                        <i class="fas fa-check check-icon"></i>
+                        <i class="fas fa-trash-alt trash-icon"></i>
+                    `;
+
+                    todoItem.querySelector('.check-icon').addEventListener('click', () => {
+                        todoItem.classList.toggle('checked');
+                        task.checked = !task.checked;
+                        saveTasks();
+                    });
+
+                    todoItem.querySelector('.trash-icon').addEventListener('click', () => {
+                        tasks = tasks.filter(t => t !== task);
+                        saveTasks();
+                        updateTodoList();
+                    });
+
+                    todoList.appendChild(todoItem);
+                });
+            }
+
+            function saveTasks() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+
+            function formatTime(time) {
+                if (!time) return '';
+                const [hours, minutes] = time.split(':');
+                return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+            }
+
+            function updateTitle() {
+                listTitle.textContent = listTitleText;
+            }
+
+            updateTodoList();
+            updateTitle();
+        });
+    </script>
+</body>
+</html>

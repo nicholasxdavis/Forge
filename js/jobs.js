@@ -1,50 +1,38 @@
 // js/script.js
 
-// Function to generate random names
-function generateNames(count) {
-    const names = ['Doctor', 'Programmer', 'Artist'];
-    let generatedNames = '';
-    let usedNames = new Set();
-
-    if (count > names.length) {
-        count = names.length;
-    }
-
-    while (usedNames.size < count) {
-        const randomIndex = Math.floor(Math.random() * names.length);
-        const selectedName = names[randomIndex];
-
-        if (!usedNames.has(selectedName)) {
-            usedNames.add(selectedName);
-            generatedNames += selectedName + '\n';
-        }
-    }
-
-    return generatedNames;
+// Function to fetch random job titles from API
+async function fetchRandomJobTitles(count) {
+    const apiKey = 'UkcqoZxfLnEJM0Lp+o/TrQ==nM6MfOXQ3XT0f8SX'; // Replace with your API key from API Ninjas
+    const response = await fetch(`https://api.api-ninjas.com/v1/job_titles?limit=${count}`, {
+        headers: { 'X-Api-Key': apiKey }
+    });
+    const data = await response.json();
+    return data.map(job => job.title).join('\n');
 }
 
-// Function to display generated names
-function displayNames() {
+// Function to display generated job titles
+async function displayJobTitles() {
     const nameCount = document.getElementById('name-count').value;
     const genSection = document.getElementById('gen');
+    const jobTitles = await fetchRandomJobTitles(nameCount);
 
-    genSection.innerHTML = generateNames(nameCount).replace(/\n/g, '<br>');
+    genSection.innerHTML = jobTitles.replace(/\n/g, '<br>');
 }
 
 // Function to handle regenerate button click
-function regenerateNames() {
-    displayNames();
+function regenerateJobTitles() {
+    displayJobTitles();
 }
 
 // Function to handle save button click
-function saveNames() {
+function saveJobTitles() {
     const genSection = document.getElementById('gen');
-    const generatedNames = genSection.innerText;
-    const blob = new Blob([generatedNames], { type: 'text/plain' });
+    const generatedJobTitles = genSection.innerText;
+    const blob = new Blob([generatedJobTitles], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'generated_names.txt';
+    a.download = 'generated_job_titles.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -52,13 +40,13 @@ function saveNames() {
 }
 
 // Event listener for the regenerate button
-document.getElementById('regenerate-btn').addEventListener('click', regenerateNames);
+document.getElementById('regenerate-btn').addEventListener('click', regenerateJobTitles);
 
 // Event listener for the save button
-document.getElementById('save-btn').addEventListener('click', saveNames);
+document.getElementById('save-btn').addEventListener('click', saveJobTitles);
 
-// Show the gen section and display names when the page loads
+// Show the gen section and display job titles when the page loads
 window.addEventListener('load', () => {
-    displayNames();
+    displayJobTitles();
     document.getElementById('gen').style.display = 'block';
 });

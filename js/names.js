@@ -1,34 +1,30 @@
-// js/script.js
+// Function to fetch names from API
+async function fetchNames(count, gender) {
+    let url = `https://randomuser.me/api/?results=${count}&nat=us`; // Added 'nat=us' for English names
+
+    if (gender !== 'all') {
+        url += `&gender=${gender}`;
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results.map(person => person.name.first);
+}
 
 // Function to generate random names
-function generateNames(count) {
-    const names = ['Erick', 'Naomi', 'Adam'];
-    let generatedNames = '';
-    let usedNames = new Set();
-
-    if (count > names.length) {
-        count = names.length;
-    }
-
-    while (usedNames.size < count) {
-        const randomIndex = Math.floor(Math.random() * names.length);
-        const selectedName = names[randomIndex];
-
-        if (!usedNames.has(selectedName)) {
-            usedNames.add(selectedName);
-            generatedNames += selectedName + '\n';
-        }
-    }
-
-    return generatedNames;
+async function generateNames(count, gender) {
+    const names = await fetchNames(count, gender);
+    return names.join('\n');
 }
 
 // Function to display generated names
-function displayNames() {
+async function displayNames() {
     const nameCount = document.getElementById('name-count').value;
+    const gender = document.getElementById('gender-select').value;
     const genSection = document.getElementById('gen');
 
-    genSection.innerHTML = generateNames(nameCount).replace(/\n/g, '<br>');
+    const generatedNames = await generateNames(nameCount, gender);
+    genSection.innerHTML = generatedNames.replace(/\n/g, '<br>');
 }
 
 // Function to handle regenerate button click

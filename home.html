@@ -7,34 +7,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/popups.css">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .card.disabled {
+            opacity: 0.5;
+            pointer-events: none; /* Prevent clicking */
+            position: relative;
+        }
+
+        .card.disabled::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            text-align: center;
+            width: 50%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <header>
-    <img src="img/logo.svg" alt="Forge by Blacnova Icon">
-    <nav>
+        <img src="img/logo.svg" alt="Forge by Blacnova Icon">
+        <nav>
             <ul>
                 <li><a href="home.html" class="active">Home</a></li>
                 <li><a href="plans.html">Go Pro!</a></li>
             </ul>
         </nav>
-    <button id="theme-toggle">
-        <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
-    </button>
-</header>
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
 
-<div id="data-collection-popup" class="popup">
-    <div class="popup-content">
-        <h3>Data Collection Notice</h3>
-        <p>We collect data to improve your experience on our site. This includes your IP address, browser type, and site usage details. We use this information to enhance our services and ensure everything runs smoothly.</p>
-        <p>If you’d like to learn more about our data collection practices, please refer to our <a href="privacypolicy.html">Privacy Policy</a>.</p>
-        <p>By continuing to use our site, you agree to our data collection practices. However, if you prefer not to have your data collected, you can choose to opt out.</p>
-        <button id="popup-opt-in-btn">Opt in</button>
-        <button id="popup-opt-out-btn">Opt out</button>
+    <div id="data-collection-popup" class="popup">
+        <div class="popup-content">
+            <h3>Data Collection Notice</h3>
+            <p>We collect data to improve your experience on our site. This includes your IP address, browser type, and site usage details. We use this information to enhance our services and ensure everything runs smoothly.</p>
+            <p>If you’d like to learn more about our data collection practices, please refer to our <a href="privacypolicy.html">Privacy Policy</a>.</p>
+            <p>By continuing to use our site, you agree to our data collection practices. However, if you prefer not to have your data collected, you can choose to opt out.</p>
+            <button id="popup-opt-in-btn">Opt in</button>
+            <button id="popup-opt-out-btn">Opt out</button>
+        </div>
     </div>
-</div>
 
-
-</div>
     <main>
         <section id="introduction">
             <div class="intro-container">
@@ -45,16 +66,15 @@
         <section id="encryption-panel">
             <h2>Encryption</h2>
             <div class="card-container">
-                <div class="card" data-page="encryption.html">
+                <div class="card disabled">
                     <i class="fas fa-file-alt fa-3x"></i> <!-- Font Awesome icon -->
                     <h3>File Encryption</h3>
                     <p>Encrypt and decrypt files to protect sensitive data.</p>
                 </div>
-                <div class="card" data-page="encryption.html">
+                <div class="card disabled">
                     <i class="fas fa-lock fa-3x"></i> <!-- Font Awesome icon -->
                     <h3>Password Management</h3>
-                    <p>Securely store and manage passwords with encryption.
-</p>
+                    <p>Securely store and manage passwords with encryption.</p>
                 </div>
             </div>
         </section>
@@ -131,7 +151,7 @@
         <section id="quality-checkers">
             <h2>Quality Checkers</h2>
             <div class="card-container">
-                <div class="card" data-page="code-quality.html">
+                <div class="card disabled">
                     <i class="fas fa-code fa-3x"></i> <!-- Font Awesome icon -->
                     <h3>Code Quality</h3>
                     <p>Ensure your code is clean, efficient, and free of errors.</p>
@@ -143,34 +163,34 @@
                 </div>
             </div>
         </section>
-       <section id="task-manager">
-    <h2>Task Manager</h2>
-    <div class="card-container">
-        <div class="card" data-page="to-do-lists.html">
-            <i class="fas fa-tasks fa-3x"></i> <!-- Font Awesome icon -->
-            <h3>To-Do Lists</h3>
-            <p>Create and manage multiple to-do lists.</p>
-        </div>
-        <div class="card" data-page="deadlines-reminders.html">
-            <i class="fas fa-calendar-alt fa-3x"></i> <!-- Font Awesome icon -->
-            <h3>Deadlines</h3>
-            <p>Set deadlines and get notifications.</p>
-        </div>
-        <div class="card" data-page="note-taker.html">
-            <i class="fas fa-sticky-note fa-3x"></i> <!-- Font Awesome icon -->
-            <h3>Note Taker</h3>
-            <p>Write and organize your notes effectively</p>
-        </div>
-    </div>
-</section>
+        <section id="task-manager">
+            <h2>Task Manager</h2>
+            <div class="card-container">
+                <div class="card" data-page="todo.html">
+                    <i class="fas fa-tasks fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>To-Do Lists</h3>
+                    <p>Create and manage multiple to-do lists.</p>
+                </div>
+                <div class="card" data-page="deadline.html">
+                    <i class="fas fa-calendar-alt fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Deadlines</h3>
+                    <p>Set deadlines and get notifications.</p>
+                </div>
+                <div class="card" data-page="notes.html">
+                    <i class="fas fa-sticky-note fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Note Taker</h3>
+                    <p>Write and organize your notes effectively.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
-       <footer>
-    <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
-    <p>
-        <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
-    </p>
-</footer>
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
+    </footer>
     <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -180,7 +200,7 @@
         // Function to handle card click and navigate to the specified page
         function handleCardClick(event) {
             const targetPage = event.currentTarget.getAttribute('data-page');
-            if (targetPage) {
+            if (targetPage && !event.currentTarget.classList.contains('disabled')) {
                 window.location.href = targetPage;
             }
         }

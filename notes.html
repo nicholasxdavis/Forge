@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notetaker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <style>
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Note Panel styles */
+        #note-panel {
+            width: 250px; /* Keep the original width */
+            background-color: var(--card-background-light); /* Default light mode background */
+            color: var(--text-light); /* Default light mode text */
+            padding: 10px;
+            border-right: 2px solid var(--card-background-dark); /* Border color */
+            height: calc(465px - 65px); /* Keep the original height */
+            margin-top: 10px;
+            overflow-y: auto;
+            border: 1px solid var(--card-background-dark);
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        /* Dark mode note panel styles */
+        body.dark-mode #note-panel {
+            border: 1px solid var(--card-background-light);
+            background-color: var(--card-background-dark);
+            color: var(--text-dark);
+            border-right: 2px solid var(--card-background-light); /* Dark mode border color */
+        }
+
+        /* Editor styles */
+        #editor {
+            flex-grow: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Notepad styles */
+        #notepad {
+            width: 100%;
+            padding: 10px;
+            height: 400px;
+            box-sizing: border-box;
+            border: 1px solid var(--card-background-dark); /* Border color */
+            border-radius: 5px;
+            font-size: 16px;
+            line-height: 1.5;
+            resize: vertical; /* Allows resizing in the vertical direction if needed */
+            margin-bottom: 10px; /* Space for the button */
+        }
+
+        /* Dark mode notepad styles */
+        body.dark-mode #notepad {
+            border: 1px solid var(--card-background-light); /* Dark mode border color */
+            background-color: var(--card-background-dark); /* Dark mode background */
+            color: var(--text-dark); /* Dark mode text color */
+        }
+
+        /* Save button styles */
+        #save-button {
+            align-self: flex-end; /* Aligns the button to the right */
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--button-background-light); /* Light mode background */
+            color: var(--button-text-light); /* Light mode text color */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Dark mode save button styles */
+        body.dark-mode #save-button {
+            background-color: var(--button-background-dark); /* Dark mode background */
+            color: var(--button-text-dark); /* Dark mode text color */
+        }
+
+        /* Hover effect for save button */
+        #save-button:hover {
+            background-color: var(--button-background-hover); /* Hover effect */
+        }
+
+        /* Note list styles */
+        #note-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Individual note item styles */
+        #note-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: var(--note-background-light); /* Light mode note background */
+            color: var(--note-text-light); /* Light mode note text color */
+            border: 1px solid var(--note-border-light);
+            border-radius: 5px;
+            position: relative;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Dark mode individual note item styles */
+        body.dark-mode #note-list li {
+            background-color: var(--note-background-dark); /* Dark mode note background */
+            color: var(--note-text-dark); /* Dark mode note text color */
+            border: 1px solid var(--note-border-dark);
+        }
+
+        /* Hover effect for notes */
+        #note-list li:hover {
+            background-color: var(--note-hover-background); /* Note hover background color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        /* Delete icon styles */
+        .delete-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--delete-icon-color); /* Default delete icon color */
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        /* Dark mode delete icon styles */
+        body.dark-mode .delete-icon {
+            color: var(--delete-icon-color-dark); /* Dark mode delete icon color */
+        }
+
+        /* Hover effect for delete icon */
+        .delete-icon:hover {
+            color: var(--delete-icon-hover-color); /* Delete icon hover color */
+        }
+
+        @media (max-width: 768px) {
+            #note-panel {
+                width: 120px; /* Keep the original width */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
+    <main>
+        <section id="introduction">
+            <div class="intro-container">
+                <h2>Notetaker</h2>
+                <p>Create and manage your notes efficiently.</p>
+            </div>
+        </section>
+        <div class="container">
+            <aside id="note-panel">
+                <h3>Note Panel</h3>
+                <ul id="note-list">
+                    <!-- Notes will be listed here with delete icons -->
+                </ul>
+            </aside>
+            <section id="editor">
+                <textarea id="notepad" placeholder="Type your text here..."></textarea>
+                <button id="save-button">Save</button>
+            </section>
+        </div>
+    </main>
+    <section id="footerprint">
+        <p>Thanks for choosing Blacnova's Forge!</p>
+    </section>
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/note.js"></script>
+
+    <script>
+        function redirectToHome() {
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>
