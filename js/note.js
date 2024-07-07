@@ -40,7 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const noteIndex = e.currentTarget.getAttribute('data-index');
                 deleteNote(noteIndex);
             });
-            li.addEventListener('click', () => loadNote(index));
+
+            // Toggle selected note
+            li.addEventListener('click', () => {
+                loadNote(index);
+                const selectedNote = document.querySelector('#note-list li.selected');
+                if (selectedNote) {
+                    selectedNote.classList.remove('selected');
+                }
+                li.classList.add('selected');
+            });
+
             noteList.appendChild(li);
         });
     };

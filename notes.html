@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notetaker</title>
+    <title>Forge - Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
@@ -15,26 +15,44 @@
 
         /* Note Panel styles */
         #note-panel {
-            width: 250px; /* Keep the original width */
-            background-color: var(--card-background-light); /* Default light mode background */
-            color: var(--text-light); /* Default light mode text */
-            padding: 10px;
-            border-right: 2px solid var(--card-background-dark); /* Border color */
-            height: calc(465px - 65px); /* Keep the original height */
-            margin-top: 10px;
-            overflow-y: auto;
-            border: 1px solid var(--card-background-dark);
-            box-sizing: border-box;
-            border-radius: 5px;
-        }
+    width: 250px; /* Keep the original width */
+    background-color: var(--card-background-light); /* Default light mode background */
+    color: var(--text-light); /* Default light mode text */
+    padding: 10px;
+    border-right: 2px solid var(--card-background-dark); /* Border color */
+    height: calc(465px - 65px); /* Keep the original height */
+    margin-top: 10px;
+    overflow-y: auto;
+    border: 1px solid var(--card-background-dark);
+    box-sizing: border-box;
+    border-radius: 5px;
+    scrollbar-width: thin; /* Custom scrollbar width */
+    scrollbar-color: var(--primary-color) var(--card-background-light); /* Custom scrollbar color */
+}
 
         /* Dark mode note panel styles */
         body.dark-mode #note-panel {
-            border: 1px solid var(--card-background-light);
-            background-color: var(--card-background-dark);
-            color: var(--text-dark);
-            border-right: 2px solid var(--card-background-light); /* Dark mode border color */
-        }
+    border: 1px solid var(--card-background-light);
+    background-color: var(--card-background-dark);
+    color: var(--text-dark);
+    border-right: 2px solid var(--card-background-light); /* Dark mode border color */
+}
+
+/* Scrollbar track styles (optional) */
+#note-panel::-webkit-scrollbar-track {
+    background: var(--card-background-light);
+}
+
+/* Scrollbar thumb styles */
+#note-panel::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+/* Scrollbar thumb on hover (optional) */
+#note-panel::-webkit-scrollbar-thumb:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
 
         /* Editor styles */
         #editor {
@@ -123,7 +141,16 @@
             background-color: var(--note-hover-background); /* Note hover background color */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
         }
-
+        #note-list li.selected {
+    background-color: var(--primary-color); /* Green background for selected item */
+    border-color: green; /* Green border color for selected item */
+    color: white; /* Text color for selected item */
+}
+        body.dark-mode #note-list li.selected {
+    background-color: var(--primary-color); /* Green background for selected item */
+    border-color: green; /* Green border color for selected item */
+    color: white; /* Text color for selected item */
+}
         /* Delete icon styles */
         .delete-icon {
             background: none;
@@ -161,8 +188,11 @@
     <main>
         <section id="introduction">
             <div class="intro-container">
-                <h2>Notetaker</h2>
-                <p>Create and manage your notes efficiently.</p>
+                <h2>Notes</h2>
+                <p>Create and manage your notes efficiently.<br>Download notes locally.</p>
+                <div class="button-container">
+                    <button id="regenerate-btn">Download Selected</button>
+                    <button id="save-btn">Download All</button>
             </div>
         </section>
         <div class="container">
@@ -171,13 +201,14 @@
                 <ul id="note-list">
                     <!-- Notes will be listed here with delete icons -->
                 </ul>
+
             </aside>
             <section id="editor">
                 <textarea id="notepad" placeholder="Type your text here..."></textarea>
                 <button id="save-button">Save</button>
             </section>
         </div>
-    </main>
+    </main>     
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
@@ -189,7 +220,7 @@
 
     <script>
         function redirectToHome() {
-            window.location.href = "home.html";
+            window.location.href = "index.html";
         }
     </script>
 </body>

@@ -53,6 +53,7 @@ header {
     padding: 1rem;
     background-color: var(--primary-color);
     color: var(--text-dark);
+    z-index: 99;
 }
 
 header img {
@@ -60,20 +61,25 @@ header img {
     width: 25px;
     height: 25px;
     filter: invert(1);
+    z-index: 99;
 }
 
 nav ul {
+    z-index: 99;
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
+    z-index: 99;
 }
 
 nav ul li {
+    z-index: 99;
     margin: 0 1rem;
 }
 
 nav ul li a {
+    z-index: 99;
     text-decoration: none;
     color: var(--text-dark);
     font-weight: bold;
@@ -86,17 +92,20 @@ nav ul li a.active {
 }
 
 header h1 {
+    z-index: 99;
     margin: 0;
 }
 
 /* Theme toggle button */
 #theme-toggle {
+    z-index: 99;
     background: none;
     border: none;
     cursor: pointer;
 }
 
 #theme-icon {
+    z-index: 99;
     filter: invert(1);
     width: 20px; /* Adjust icon size */
     height: 20px; /* Adjust icon size */
@@ -250,7 +259,6 @@ footer a {
         }
         #footerprint {
     text-align: center;
-    margin-top: 490px; /* Adjust spacing as needed */
 }
 
 footer p {
