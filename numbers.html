@@ -1,16 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate Random Location</title>
+   <title># Generator - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
+    <style> 
+                #gen {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 2.5rem;
+            margin-bottom: -15px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
@@ -26,7 +35,7 @@
                 </div>
                 <div class="input-container">
                     <label for="number-count">Number of generations:</label>
-                    <input type="number" id="number-count" name="number-count" min="1" max="100" value="5">
+                    <input type="number" id="number-count" name="number-count" min="1" max="100" value="10">
                 </div>
                 <div class="input-container">
                     <label for="digits-count">Number of digits:</label>
@@ -42,18 +51,24 @@
                 Hi, Hello!<br></p>
         </section>
     </main>
+        <section id="footerprint">
+<p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+    </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/numbers.js"></script>
     
     <script>
         function redirectToHome() {
-            window.location.href = "index.html";
+            window.location.href = "tools.html";
         }
     </script>
 </body>

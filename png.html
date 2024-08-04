@@ -3,17 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convert Your Files</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <title>Image Converter - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/convert.css">
     <link rel="stylesheet" href="css/gen.css">
+    <style>
+        .progress-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+        }
 
+        body.dark-mode .progress-container label {
+            color: white;
+        }
+
+        .progress-container label {
+            margin-top: -80px;
+            text-align: center;
+            margin-bottom: 0.1rem;
+        }
+
+        progress {
+            width: 100%;
+            max-width: 400px;
+            height: 1.5rem;
+            appearance: none;
+            border: none;
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        body.dark-mode progress::-webkit-progress-bar {
+            background-color: white;
+        }
+
+        progress::-webkit-progress-bar {
+            box-shadow: 0 4px 8px var(--card-shadow-light);
+            border: solid 2px var(--primary-color);
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        progress::-webkit-progress-value {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        progress::-moz-progress-bar {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
@@ -37,13 +86,13 @@
                             <label for="file-upload">Choose files to convert</label>
                             <input type="file" id="file-upload" name="file-upload" multiple>
                         </div>
-                        <div id="drop-area" class="form-group" 
-     ondragover="handleDragOver(event)"
-     ondragenter="handleDragEnter(event)"
-     ondragleave="handleDragLeave(event)"
-     ondrop="handleDrop(event)">
-    <p>Or drag and drop files here</p>
-</div>
+                        <div id="drop-area" class="form-group"
+                             ondragover="handleDragOver(event)"
+                             ondragenter="handleDragEnter(event)"
+                             ondragleave="handleDragLeave(event)"
+                             ondrop="handleDrop(event)">
+                            <p>Or drag and drop files here</p>
+                        </div>
                         <div class="form-group">
                             <label for="conversion-type">Select conversion type</label>
                             <select id="conversion-type" name="conversion-type">
@@ -71,11 +120,17 @@
             <progress id="upload-progress" value="0" max="100"></progress>
         </div>
     </main>
+        <section id="footerprint">
+<p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+    </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/img.js"></script>
@@ -83,15 +138,13 @@
 
     <script>
         function redirectToHome() {
-            window.location.href = "index.html";
+            window.location.href = "tools.html";
         }
 
-        // Event listener for Convert Video Files button
         document.getElementById('regenerate-btn').addEventListener('click', function() {
             window.location.href = "video.html";
         });
 
-        // Event listener for Convert Audio Files button
         document.getElementById('save-btn').addEventListener('click', function() {
             window.location.href = "audio.html";
         });

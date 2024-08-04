@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy & Terms and Conditions - Forge by Blacnova</title>
+    <title>ToS & Privacy Policy - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/policy.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-        <img src="img/logo.svg" alt="Forge by Blacnova Icon">
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="plans.html">Go Pro!</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
         </nav>
         <button id="theme-toggle">
@@ -37,7 +40,7 @@
                 <ul>
                     <li><strong>Personal Information:</strong> This includes your name, email address, and other contact details when you create an account or contact us.</li>
                     <li><strong>Usage Data:</strong> We collect information about how you interact with our website and services, including your IP address, browser type, and site usage details.</li>
-                    <li><strong>Cookies:</strong> We use cookies and similar technologies to enhance your experience on our site. You can manage your cookie preferences through your browser settings.</li>
+                    <li><strong>Cookies:</strong> We use cookies and similar technologies to store preferences (e.g., dark mode), notes, lists, and settings on certain tools. You can manage your cookie preferences through your browser settings.</li>
                 </ul>
 
                 <h2>2. How We Use Your Information</h2>
@@ -73,100 +76,102 @@
 
         <!-- Terms and Conditions Section -->
         <section id="terms-conditions">
-    <div class="policy-container">
-        <h1>Terms and Conditions</h1>
-        <!-- Print and Save Buttons -->
-        <div class="button-container">
-            <button id="print-terms-btn">Print Terms and Conditions</button>
-            <button id="save-terms-btn">Save Terms and Conditions as PDF</button>
-        </div>
-        <h2>1. Introduction</h2>
-        <p>Welcome to Forge by Blacnova. These Terms and Conditions govern your use of our website and services. By accessing or using our website and services, you agree to be bound by these terms. If you do not agree to these terms, please do not use our website or services.</p>
+            <div class="policy-container">
+                <h1>Terms and Conditions</h1>
+                <!-- Print and Save Buttons -->
+                <div class="button-container">
+                    <button id="print-terms-btn">Print Terms and Conditions</button>
+                    <button id="save-terms-btn">Save Terms and Conditions as PDF</button>
+                </div>
 
-        <h2>2. Services Offered</h2>
-        <h3>2.1 Encryption</h3>
-        <ul>
-            <li><strong>File Encryption:</strong> Encrypt and decrypt files to protect sensitive data.</li>
-            <li><strong>Password Management:</strong> Securely store and manage passwords with encryption.</li>
-        </ul>
-        
-        <h3>2.2 Generators</h3>
-        <ul>
-            <li><strong>Name Generator:</strong> Generate random names for various purposes.</li>
-            <li><strong>Animal Generator:</strong> Generate random animals from across the world.</li>
-            <li><strong>Location Generator:</strong> Generate random locations around the globe.</li>
-            <li><strong>Job Generator:</strong> Generate random occupations and professions.</li>
-            <li><strong>Number Generator:</strong> Generate random numbers within specified ranges.</li>
-            <li><strong>Color Generator:</strong> Generate random colors or color palettes for design.</li>
-            <li><strong>Quote Generator:</strong> Generate random quotes for inspiration and reflection.</li>
-            <li><strong>Recipe Generator:</strong> Generate random recipes for culinary experiments.</li>
-        </ul>
+                <h2>Services Offered</h2>
+                
+                <h3>2.2 Generators</h3>
+                <ul>
+                    <li><strong>Name Generator:</strong> Generate random names for various purposes.</li>
+                    <li><strong>Animal Generator:</strong> Generate random animals from across the world.</li>
+                    <li><strong>Location Generator:</strong> Generate random locations around the globe.</li>
+                    <li><strong>Job Generator:</strong> Generate random occupations and professions.</li>
+                    <li><strong>Number Generator:</strong> Generate random numbers within specified ranges.</li>
+                    <li><strong>Color Generator:</strong> Generate random colors or color palettes for design.</li>
+                    <li><strong>Quote Generator:</strong> Generate random quotes for inspiration and reflection.</li>
+                    <li><strong>Recipe Generator:</strong> Generate random recipes for culinary experiments.</li>
+                </ul>
 
-        <h3>2.3 Converters</h3>
-        <ul>
-            <li><strong>Image Converter:</strong> Convert images between various formats.</li>
-            <li><strong>Audio Converter:</strong> Convert audio files between different formats.</li>
-            <li><strong>Video Converter:</strong> Convert video files to various formats.</li>
-            <li><strong>Document Converter:</strong> Convert between PDF and other document formats.</li>
-        </ul>
+                <h3>2.3 Converters</h3>
+                <ul>
+                    <li><strong>Image Converter:</strong> Convert images between various formats.</li>
+                    <li><strong>Audio Converter:</strong> Convert audio files between different formats.</li>
+                    <li><strong>Video Converter:</strong> Convert video files to various formats.</li>
+                    <li><strong>Document Converter:</strong> Convert between PDF and other document formats.</li>
+                </ul>
 
-        <h3>2.4 Quality Checkers</h3>
-        <ul>
-            <li><strong>Code Quality:</strong> Ensure your code is clean, efficient, and free of errors.</li>
-            <li><strong>Grammar Quality:</strong> Ensure your text is grammatically accurate and polished.</li>
-        </ul>
+                <h3>2.4 Compressors</h3>
+                <ul>
+                    <li><strong>Image Compressor:</strong> Compress images between various sizes.</li>
+                </ul>
 
-        <h3>2.5 Task Manager</h3>
-        <ul>
-            <li><strong>To-Do Lists:</strong> Create and manage multiple to-do lists.</li>
-            <li><strong>Deadlines:</strong> Set deadlines and get notifications.</li>
-            <li><strong>Note Taker:</strong> Write and organize your notes effectively.</li>
-        </ul>
+                <h3>2.5 Quality Checkers</h3>
+                <ul>
+                    <li><strong>Code Quality:</strong> Ensure your code is clean, efficient, and free of errors.</li>
+                    <li><strong>Grammar Quality:</strong> Ensure your text is grammatically accurate and polished.</li>
+                </ul>
 
-        <h2>3. User Obligations</h2>
-        <p>By using our services, you agree to use them only for lawful purposes and in accordance with these Terms and Conditions. You agree not to engage in any activity that may harm our website or services, including but not limited to:</p>
-        <ul>
-            <li>Using ad-blocking software or other tools to prevent the display of ads on our website.</li>
-            <li>Attempting to gain unauthorized access to our website or services.</li>
-            <li>Interfering with the proper functioning of our website or services.</li>
-            <li>Posting or transmitting any material that is illegal, harmful, or otherwise objectionable.</li>
-        </ul>
+                <h3>2.6 Task Manager</h3>
+                <ul>
+                    <li><strong>To-Do Lists:</strong> Create and manage multiple to-do lists.</li>
+                    <li><strong>Deadlines:</strong> Set deadlines and get notifications.</li>
+                    <li><strong>Notes:</strong> Write and organize your notes effectively.</li>
+                </ul>
 
-        <h2>4. Intellectual Property</h2>
-        <p>All content on our website, including text, graphics, logos, and images, is the property of Forge by Blacnova or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not use, reproduce, or distribute any content from our website without our express written permission.</p>
+                <h2>1. User Obligations</h2>
+                <p>By using our services, you agree to use them only for lawful purposes and in accordance with these Terms and Conditions. You agree not to engage in any activity that may harm our website or services, including but not limited to:</p>
+                <ul>
+                    <li>Using ad-blocking software or other tools to prevent the display of ads on our website.</li>
+                    <li>Attempting to gain unauthorized access to our website or services.</li>
+                    <li>Interfering with the proper functioning of our website or services.</li>
+                    <li>Posting or transmitting any material that is illegal, harmful, or otherwise objectionable.</li>
+                </ul>
 
-        <h2>5. Limitation of Liability</h2>
-        <p>To the fullest extent permitted by law, Forge by Blacnova shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with your use of our website or services. This includes, but is not limited to, damages for loss of profits, data, or other intangible losses.</p>
+                <h2>2. Intellectual Property</h2>
+                <p>All content on our website, including text, graphics, logos, and images, is the property of Forge by Blacnova or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not use, reproduce, or distribute any content from our website without our express written permission.</p>
 
-        <h2>6. Indemnification</h2>
-        <p>You agree to indemnify and hold harmless Forge by Blacnova and its affiliates, officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your use of our website or services, your violation of these Terms and Conditions, or your violation of any rights of another party.</p>
+                <h2>3. Limitation of Liability</h2>
+                <p>To the fullest extent permitted by law, Forge by Blacnova shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with your use of our website or services. This includes, but is not limited to, damages for loss of profits, data, or other intangible losses.</p>
 
-        <h2>7. Changes to Terms</h2>
-        <p>We reserve the right to modify these Terms and Conditions at any time. Any changes will be posted on this page, and your continued use of our website or services after such changes constitutes your acceptance of the new terms.</p>
+                <h2>4. Indemnification</h2>
+                <p>You agree to indemnify and hold harmless Forge by Blacnova and its affiliates, officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your use of our website or services, your violation of these Terms and Conditions, or your violation of any rights of another party.</p>
 
-        <h2>8. Governing Law</h2>
-        <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law principles. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of [Your Country/State].</p>
+                <h2>5. Changes to Terms</h2>
+                <p>We reserve the right to modify these Terms and Conditions at any time. Any changes will be posted on this page, and your continued use of our website or services after such changes constitutes your acceptance of the new terms.</p>
 
-        <h2>7. Contact Us</h2>
+                <h2>6. Governing Law</h2>
+                <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of New Mexico, United States, without regard to its conflict of law principles. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of New Mexico, United States.</p>
+
+                <h2>Contact Us</h2>
                 <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us.</p>
                 <address>
                     <a href="mailto:support@blacnova.store">support@blacnova.store</a><br>
                     Forge by Blacnova<br>
                     <a href="https://blacnova.store" target="_blank">blacnova.store</a>
                 </address>
-    </div>
-</section>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
     <script src="js/script.js"></script>
     <script>
         // Theme toggle script if needed
-
+        function redirectToHome() {
+    window.location.href = "tools.html";
+}
         // Print button functionality for Privacy Policy
         document.getElementById('print-privacy-btn').addEventListener('click', function() {
             window.print();

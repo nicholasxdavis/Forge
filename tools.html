@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .card.broken {
+            opacity: 0.5;
+            pointer-events: none; /* Prevent clicking */
+            position: relative;
+        }
+
+        .card.broken::after {
+            content: "Not Working";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+             background: rgba(255, 0, 0, 0.7); 
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            text-align: center;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .card.disabled {
+            opacity: 0.5;
+            pointer-events: none; /* Prevent clicking */
+            position: relative;
+        }
+
+        .card.disabled::after {
+            content: "Haven't Started";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            text-align: center;
+            width: 50%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <nav>
+            <ul>
+                <li><a href="index.html" >Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html" >About</a></li>
+                <li><a href="contact.html" >Contact</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
+
+    <div id="data-collection-popup" class="popup">
+        <div class="popup-content">
+    <h3>Welcome to Forge!</h3>
+    <p>Forge by Blacnova is a versatile platform that combines creativity and security tools into one seamless experience.</p>
+    <p>It's crafted to meet the diverse needs of users seeking innovative solutions for generating names and colors, encrypting files, managing tasks efficiently, and more.</p>
+    <button id="popup-opt-in-btn">Get Started</button>
+    <button id="popup-opt-out-btn">Close</button>
+</div>
+    </div>
+
+    <main>
+        <section id="introduction">
+            <div class="intro-container">
+                <h2>Tools</h2>
+                <p>Explore our diverse tools for creativity and security. From name and color generators to file encryption and task management, Forge has everything you need to innovate and stay organized.</p>
+            </div>
+        </section>
+                <section id="converters">
+            <h2>Converters</h2>
+            <div class="card-container">
+                <div class="card" data-page="png.html">
+                    <i class="fas fa-image fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Image Converter</h3>
+                    <p>Convert images between various formats.</p>
+                </div>
+                <div class="card" data-page="video.html">
+                    <i class="fas fa-video fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Video Converter</h3>
+                    <p>Convert video files to various formats.</p>
+                </div>
+                <div class="card" data-page="audio.html">
+                    <i class="fas fa-volume-up fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Audio Converter</h3>
+                    <p>Convert audio files between different formats.</p>
+                </div>
+            </div>
+        </section>
+        <section id="task-manager">
+            <h2>Task Manager</h2>
+            <div class="card-container">
+                <div class="card" data-page="todo.html">
+                    <i class="fas fa-tasks fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>To-Do Lists</h3>
+                    <p>Create and manage multiple to-do lists.</p>
+                </div>
+                <div class="card" data-page="deadline.html">
+                    <i class="fas fa-calendar-alt fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Deadlines</h3>
+                    <p>Set deadlines and get notifications.</p>
+                </div>
+                <div class="card" data-page="notes.html">
+                    <i class="fas fa-sticky-note fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Notes</h3>
+                    <p>Write and organize your notes effectively.</p>
+                </div>
+            </div>
+        </section>
+        <section id="generator-directory">
+            <h2>Generators</h2>
+            <div class="card-container">
+                <div class="card" data-page="names.html">
+                    <i class="fas fa-user fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Name Generator</h3>
+                    <p>Generate random names for various purposes.</p>
+                </div>
+                <div class="card" data-page="numbers.html">
+                    <i class="fas fa-hashtag fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Number Generator</h3>
+                    <p>Generate random numbers within specified ranges.</p>
+                </div>
+                <div class="card" data-page="colors.html">
+                    <i class="fas fa-palette fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Color Generator</h3>
+                    <p>Generate random colors or color palettes for design.</p>
+                </div>
+                <div class="card" data-page="quotes.html">
+                    <i class="fas fa-quote-left fa-3x"></i> <!-- Font Awesome icon -->
+                    <h3>Quote Generator</h3>
+                    <p>Generate random quotes for inspiration and reflection.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
+    </footer>
+    <script src="js/popups.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+        // Get all card elements
+        const cards = document.querySelectorAll('.card');
+
+        // Function to handle card click and navigate to the specified page
+        function handleCardClick(event) {
+            const targetPage = event.currentTarget.getAttribute('data-page');
+            if (targetPage && !event.currentTarget.classList.contains('disabled')) {
+                window.location.href = targetPage;
+            }
+        }
+
+        // Add event listener for each card
+        cards.forEach(card => {
+            card.addEventListener('click', handleCardClick);
+        });
+    </script>
+</body>
+</html>

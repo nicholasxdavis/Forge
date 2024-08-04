@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deadline Tracker</title>
+    <title>Deadline Tracker - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
@@ -35,6 +36,7 @@
         }
         .deadline-input-container {
             display: flex;
+            flex-direction: column; /* Default to vertical stack for mobile */
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -73,86 +75,119 @@
         }
 
         .deadline-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s, color 0.3s;
-}
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
         .deadline-item:last-child {
             border-bottom: none;
         }
 
         .deadline-item.passed {
-    background-color: #f8d7da; /* Light red background for passed deadlines */
-    color: #721c24; /* Darker text color for visibility */
-}
-.deadline-item.checked {
-    background-color: #d4edda; /* Light green background for checked deadlines */
-    color: #155724; /* Darker text color for visibility */
-}
+            background-color: #f8d7da; /* Light red background for passed deadlines */
+            color: #721c24; /* Darker text color for visibility */
+        }
 
-       .deadline-item .check-icon,
-.deadline-item .trash-icon {
-    color: #28a745; /* Green check icon color */
-    cursor: pointer;
-    margin-left: 10px;
-}
+        .deadline-item.checked {
+            background-color: #d4edda; /* Light green background for checked deadlines */
+            color: #155724; /* Darker text color for visibility */
+        }
 
-.deadline-item .check-icon {
-    margin-left: auto; /* Align check icon to the right */
-}
+        .deadline-item .check-icon,
+        .deadline-item .trash-icon {
+            color: #28a745; /* Green check icon color */
+            cursor: pointer;
+            margin-left: 10px;
+        }
 
-.deadline-item .trash-icon {
-    color: #dc3545; /* Red trash icon color */
-}
+        .deadline-item .check-icon {
+            margin-left: auto; /* Align check icon to the right */
+        }
 
-.deadline-item .trash-icon:hover {
-    color: #c82333;
-}
+        .deadline-item .trash-icon {
+            color: #dc3545; /* Red trash icon color */
+        }
+
+        .deadline-item .trash-icon:hover {
+            color: #c82333;
+        }
 
         .deadline-item .deadline-time {
             margin-left: 10px;
         }
+
         input[type="text"],
-input[type="date"],
-input[type="time"] {
-    flex: 1;
-    opacity: 0.7;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
-    font-size: 16px; /* Ensure text size is consistent */
-}
+        input[type="date"],
+        input[type="time"] {
+            flex: 1;
+            opacity: 0.7;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            font-size: 16px; /* Ensure text size is consistent */
+        }
 
-/* Specific styles for date input */
-input[type="date"] {
-    width: 160px; /* Adjust width as needed */
-    appearance: none; /* Remove default styling */
-}
+        /* Specific styles for date input */
+        input[type="date"] {
+            width: 160px; /* Adjust width as needed */
+            appearance: none; /* Remove default styling */
+        }
 
-/* Specific styles for time input */
-input[type="time"] {
-    width: 120px; /* Adjust width as needed */
-    appearance: none; /* Remove default styling */
-}
+        /* Specific styles for time input */
+        input[type="time"] {
+            width: 120px; /* Adjust width as needed */
+            appearance: none; /* Remove default styling */
+        }
 
-/* Ensure inputs are displayed consistently */
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-    opacity: 0.7;
-    display: block;
-    margin-bottom: 20px; /* Add spacing if needed */
-}
+        /* Ensure inputs are displayed consistently */
+        input[type="text"],
+        input[type="date"],
+        input[type="time"] {
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 20px; /* Add spacing if needed */
+        }
+
+        /* Adjust styles for larger screens */
+        @media (min-width: 768px) {
+            .deadline-input-container {
+                flex-direction: row; /* Horizontal layout on larger screens */
+            }
+
+            #deadline-input, #deadline-date, #deadline-time {
+                flex: 1;
+            }
+
+            #deadline-time {
+                width: auto; /* Reset width for larger screens */
+            }
+            
+            #add-deadline {
+                height: 45px;
+                margin-left: 10px;
+            }
+        }
+
+        /* Mobile styles */
+        @media (max-width: 767px) {
+            #deadline-date, #deadline-time {
+                width: 100%; /* Full width on small screens */
+            }
+
+            #add-deadline {
+                width: 100%; /* Full width on small screens */
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
@@ -179,131 +214,134 @@ input[type="time"] {
         </div>
     </main>
     <section id="footerprint">
+        <p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+    </section>
+    <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
     </footer>
     <script src="js/script.js"></script>
     <script>
         function redirectToHome() {
-            window.location.href = "index.html";
+            window.location.href = "tools.html";
         }
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-    const deadlineInput = document.getElementById('deadline-input');
-    const deadlineDate = document.getElementById('deadline-date');
-    const deadlineTime = document.getElementById('deadline-time');
-    const addDeadlineButton = document.getElementById('add-deadline');
-    const deadlineList = document.getElementById('deadline-list');
+            const deadlineInput = document.getElementById('deadline-input');
+            const deadlineDate = document.getElementById('deadline-date');
+            const deadlineTime = document.getElementById('deadline-time');
+            const addDeadlineButton = document.getElementById('add-deadline');
+            const deadlineList = document.getElementById('deadline-list');
 
-    // Load deadlines from localStorage and parse date objects
-    let deadlines = JSON.parse(localStorage.getItem('deadlines')) || [];
-    deadlines = deadlines.map(d => ({
-        ...d,
-        dateObj: new Date(d.dateObj), // Ensure dateObj is a Date object
-        checked: d.checked || false // Default state for checked deadlines
-    }));
+            // Load deadlines from localStorage and parse date objects
+            let deadlines = JSON.parse(localStorage.getItem('deadlines')) || [];
+            deadlines = deadlines.map(d => ({
+                ...d,
+                dateObj: new Date(d.dateObj), // Ensure dateObj is a Date object
+                checked: d.checked || false // Default state for checked deadlines
+            }));
 
-    addDeadlineButton.addEventListener('click', addDeadline);
-    deadlineInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') addDeadline();
-    });
-
-    function addDeadline() {
-        const deadlineText = deadlineInput.value.trim();
-        const deadlineDateValue = deadlineDate.value;
-        const deadlineTimeValue = deadlineTime.value;
-
-        if (deadlineText === '' || deadlineDateValue === '') return;
-
-        const deadlineDateTime = `${deadlineDateValue}T${deadlineTimeValue}`;
-        const deadlineDateObj = new Date(deadlineDateTime);
-
-        // Create a deadline object
-        const deadline = {
-            text: deadlineText,
-            date: deadlineDateTime,
-            dateObj: deadlineDateObj,
-            checked: false // Default state for new deadlines
-        };
-
-        deadlines.push(deadline);
-        saveDeadlines(); // Save to localStorage
-        updateDeadlineList();
-        deadlineInput.value = '';
-        deadlineDate.value = ''; // Clear date input
-        deadlineTime.value = ''; // Clear time input
-    }
-
-    function updateDeadlineList() {
-        deadlineList.innerHTML = ''; // Clear the list
-
-        // Sort deadlines by date
-        deadlines.sort((a, b) => a.dateObj - b.dateObj);
-
-        // Create and append list items
-        deadlines.forEach(deadline => {
-            const deadlineItem = document.createElement('li');
-            deadlineItem.classList.add('deadline-item');
-            const now = new Date();
-            const isPassed = deadline.dateObj < now;
-
-            deadlineItem.innerHTML = `
-                <span>${deadline.text}</span>
-                ${deadline.date ? `<span class="deadline-time">${formatDate(deadline.dateObj)}</span>` : ''}
-                <i class="fas fa-check check-icon"></i>
-                <i class="fas fa-trash-alt trash-icon"></i>
-            `;
-
-            // Apply passed and checked styles
-            if (isPassed) {
-                deadlineItem.classList.add('passed');
-            }
-            if (deadline.checked) {
-                deadlineItem.classList.add('checked');
-            }
-
-            // Toggle the checked state
-            deadlineItem.querySelector('.check-icon').addEventListener('click', () => {
-                deadline.checked = !deadline.checked;
-                deadlineItem.classList.toggle('checked', deadline.checked);
-                saveDeadlines(); // Save updated state to localStorage
+            addDeadlineButton.addEventListener('click', addDeadline);
+            deadlineInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addDeadline();
             });
 
-            // Remove the item
-            deadlineItem.querySelector('.trash-icon').addEventListener('click', () => {
-                deadlines = deadlines.filter(d => d !== deadline); // Remove deadline from array
-                saveDeadlines(); // Save updated list to localStorage
-                updateDeadlineList(); // Update the list
-            });
+            function addDeadline() {
+                const deadlineText = deadlineInput.value.trim();
+                const deadlineDateValue = deadlineDate.value;
+                const deadlineTimeValue = deadlineTime.value;
 
-            deadlineList.appendChild(deadlineItem);
+                if (deadlineText === '' || deadlineDateValue === '') return;
+
+                const deadlineDateTime = `${deadlineDateValue}T${deadlineTimeValue}`;
+                const deadlineDateObj = new Date(deadlineDateTime);
+
+                // Create a deadline object
+                const deadline = {
+                    text: deadlineText,
+                    date: deadlineDateTime,
+                    dateObj: deadlineDateObj,
+                    checked: false // Default state for new deadlines
+                };
+
+                deadlines.push(deadline);
+                saveDeadlines(); // Save to localStorage
+                updateDeadlineList();
+                deadlineInput.value = '';
+                deadlineDate.value = ''; // Clear date input
+                deadlineTime.value = ''; // Clear time input
+            }
+
+            function updateDeadlineList() {
+                deadlineList.innerHTML = ''; // Clear the list
+
+                // Sort deadlines by date
+                deadlines.sort((a, b) => a.dateObj - b.dateObj);
+
+                // Create and append list items
+                deadlines.forEach(deadline => {
+                    const deadlineItem = document.createElement('li');
+                    deadlineItem.classList.add('deadline-item');
+                    const now = new Date();
+                    const isPassed = deadline.dateObj < now;
+
+                    deadlineItem.innerHTML = `
+                        <span>${deadline.text}</span>
+                        ${deadline.date ? `<span class="deadline-time">${formatDate(deadline.dateObj)}</span>` : ''}
+                        <i class="fas fa-check check-icon"></i>
+                        <i class="fas fa-trash-alt trash-icon"></i>
+                    `;
+
+                    // Apply passed and checked styles
+                    if (isPassed) {
+                        deadlineItem.classList.add('passed');
+                    }
+                    if (deadline.checked) {
+                        deadlineItem.classList.add('checked');
+                    }
+
+                    // Toggle the checked state
+                    deadlineItem.querySelector('.check-icon').addEventListener('click', () => {
+                        deadline.checked = !deadline.checked;
+                        deadlineItem.classList.toggle('checked', deadline.checked);
+                        saveDeadlines(); // Save updated state to localStorage
+                    });
+
+                    // Remove the item
+                    deadlineItem.querySelector('.trash-icon').addEventListener('click', () => {
+                        deadlines = deadlines.filter(d => d !== deadline); // Remove deadline from array
+                        saveDeadlines(); // Save updated list to localStorage
+                        updateDeadlineList(); // Update the list
+                    });
+
+                    deadlineList.appendChild(deadlineItem);
+                });
+            }
+
+            function saveDeadlines() {
+                // Convert deadlines to a format that can be saved in localStorage
+                const deadlinesToSave = deadlines.map(d => ({
+                    ...d,
+                    dateObj: d.dateObj.toISOString(), // Convert dateObj to a string
+                    checked: d.checked // Save the checked state
+                }));
+                localStorage.setItem('deadlines', JSON.stringify(deadlinesToSave));
+            }
+
+            function formatDate(dateObj) {
+                const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+                return dateObj.toLocaleDateString('en-US', options);
+            }
+
+            // Initial load
+            updateDeadlineList();
         });
-    }
-
-    function saveDeadlines() {
-        // Convert deadlines to a format that can be saved in localStorage
-        const deadlinesToSave = deadlines.map(d => ({
-            ...d,
-            dateObj: d.dateObj.toISOString(), // Convert dateObj to a string
-            checked: d.checked // Save the checked state
-        }));
-        localStorage.setItem('deadlines', JSON.stringify(deadlinesToSave));
-    }
-
-    function formatDate(dateObj) {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-        return dateObj.toLocaleDateString('en-US', options);
-    }
-
-    // Initial load
-    updateDeadlineList();
-});
-
-
-
     </script>
 </body>
 </html>

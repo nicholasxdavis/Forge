@@ -1,186 +1,30 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge - Notes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
+    <title>Notepad - Forge by Blacnova</title>
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
+    <link rel="stylesheet" href="css/temp.css">
     <style>
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        /* Note Panel styles */
-        #note-panel {
-    width: 250px; /* Keep the original width */
-    background-color: var(--card-background-light); /* Default light mode background */
-    color: var(--text-light); /* Default light mode text */
-    padding: 10px;
-    border-right: 2px solid var(--card-background-dark); /* Border color */
-    height: calc(465px - 65px); /* Keep the original height */
-    margin-top: 10px;
-    overflow-y: auto;
-    border: 1px solid var(--card-background-dark);
-    box-sizing: border-box;
-    border-radius: 5px;
-    scrollbar-width: thin; /* Custom scrollbar width */
-    scrollbar-color: var(--primary-color) var(--card-background-light); /* Custom scrollbar color */
+        #counter {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    text-align: left;
 }
 
-        /* Dark mode note panel styles */
-        body.dark-mode #note-panel {
-    border: 1px solid var(--card-background-light);
-    background-color: var(--card-background-dark);
-    color: var(--text-dark);
-    border-right: 2px solid var(--card-background-light); /* Dark mode border color */
+body.dark-mode #counter {
+    color: var(--primary-color);
 }
-
-/* Scrollbar track styles (optional) */
-#note-panel::-webkit-scrollbar-track {
-    background: var(--card-background-light);
-}
-
-/* Scrollbar thumb styles */
-#note-panel::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-}
-
-/* Scrollbar thumb on hover (optional) */
-#note-panel::-webkit-scrollbar-thumb:hover {
-    background-color: darken(var(--primary-color), 10%);
-}
-
-        /* Editor styles */
-        #editor {
-            flex-grow: 1;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Notepad styles */
-        #notepad {
-            width: 100%;
-            padding: 10px;
-            height: 400px;
-            box-sizing: border-box;
-            border: 1px solid var(--card-background-dark); /* Border color */
-            border-radius: 5px;
-            font-size: 16px;
-            line-height: 1.5;
-            resize: vertical; /* Allows resizing in the vertical direction if needed */
-            margin-bottom: 10px; /* Space for the button */
-        }
-
-        /* Dark mode notepad styles */
-        body.dark-mode #notepad {
-            border: 1px solid var(--card-background-light); /* Dark mode border color */
-            background-color: var(--card-background-dark); /* Dark mode background */
-            color: var(--text-dark); /* Dark mode text color */
-        }
-
-        /* Save button styles */
-        #save-button {
-            align-self: flex-end; /* Aligns the button to the right */
-            padding: 8px 16px;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--button-background-light); /* Light mode background */
-            color: var(--button-text-light); /* Light mode text color */
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        /* Dark mode save button styles */
-        body.dark-mode #save-button {
-            background-color: var(--button-background-dark); /* Dark mode background */
-            color: var(--button-text-dark); /* Dark mode text color */
-        }
-
-        /* Hover effect for save button */
-        #save-button:hover {
-            background-color: var(--button-background-hover); /* Hover effect */
-        }
-
-        /* Note list styles */
-        #note-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Individual note item styles */
-        #note-list li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            margin-bottom: 5px;
-            background-color: var(--note-background-light); /* Light mode note background */
-            color: var(--note-text-light); /* Light mode note text color */
-            border: 1px solid var(--note-border-light);
-            border-radius: 5px;
-            position: relative;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-
-        /* Dark mode individual note item styles */
-        body.dark-mode #note-list li {
-            background-color: var(--note-background-dark); /* Dark mode note background */
-            color: var(--note-text-dark); /* Dark mode note text color */
-            border: 1px solid var(--note-border-dark);
-        }
-
-        /* Hover effect for notes */
-        #note-list li:hover {
-            background-color: var(--note-hover-background); /* Note hover background color */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
-        }
-        #note-list li.selected {
-    background-color: var(--primary-color); /* Green background for selected item */
-    border-color: green; /* Green border color for selected item */
-    color: white; /* Text color for selected item */
-}
-        body.dark-mode #note-list li.selected {
-    background-color: var(--primary-color); /* Green background for selected item */
-    border-color: green; /* Green border color for selected item */
-    color: white; /* Text color for selected item */
-}
-        /* Delete icon styles */
-        .delete-icon {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--delete-icon-color); /* Default delete icon color */
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        /* Dark mode delete icon styles */
-        body.dark-mode .delete-icon {
-            color: var(--delete-icon-color-dark); /* Dark mode delete icon color */
-        }
-
-        /* Hover effect for delete icon */
-        .delete-icon:hover {
-            color: var(--delete-icon-hover-color); /* Delete icon hover color */
-        }
-
-        @media (max-width: 768px) {
-            #note-panel {
-                width: 120px; /* Keep the original width */
-            }
-        }
     </style>
 </head>
 <body>
     <header>
-        <img src="img/logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
@@ -190,37 +34,51 @@
             <div class="intro-container">
                 <h2>Notes</h2>
                 <p>Create and manage your notes efficiently.<br>Download notes locally.</p>
-                <div class="button-container">
-                    <button id="regenerate-btn">Download Selected</button>
-                    <button id="save-btn">Download All</button>
             </div>
         </section>
         <div class="container">
             <aside id="note-panel">
-                <h3>Note Panel</h3>
-                <ul id="note-list">
-                    <!-- Notes will be listed here with delete icons -->
-                </ul>
+    <h3>Saved Notes</h3>
+     <img id="note-panel-icon" src="img/up.svg" alt="Note Panel Icon" onclick="toggleIcon()">
+    <ul id="note-list">
+        <li data-id="1">
+            <span class="note-name">Layer 1</span>
+            <input type="text" class="note-name-input">
+            <button class="edit-icon" data-index="1" title="Edit">
+                <img src="img/edit.svg" alt="Edit Icon">
+            </button>
+            <button class="delete-icon" data-index="1" title="Delete">
+                <i class="fas fa-trash"></i>
+            </button>
+        </li>
+        <!-- Additional layers... -->
+    </ul>
+</aside>
 
-            </aside>
             <section id="editor">
-                <textarea id="notepad" placeholder="Type your text here..."></textarea>
-                <button id="save-button">Save</button>
-            </section>
+    <textarea id="notepad" placeholder="Type your text here..."></textarea>
+    <div id="counter">Words: 0 | Characters: 0</div>
+    <button id="save-button">Save</button>
+</section>
         </div>
-    </main>     
+    </main>
+    <section id="footerprint">
+<p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+    </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
+        </p>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/note.js"></script>
-
     <script>
         function redirectToHome() {
-            window.location.href = "index.html";
+            window.location.href = "tools.html";
         }
     </script>
 </body>
