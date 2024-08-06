@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const paletteCountInput = document.getElementById('palette-count');
     const colorSelect = document.getElementById('color-select');
     const paletteContainer = document.getElementById('palette-container');
+    const popup = document.getElementById('popup');
+    const closePopupButton = document.getElementById('close-popup');
+    const messageSent = document.getElementById('message-sent');
 
     regenerateBtn.addEventListener('click', () => {
         const paletteCount = parseInt(paletteCountInput.value);
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add click event to copy color code
             colorDiv.addEventListener('click', () => {
                 copyToClipboard(color);
-                alert(`Copied ${color} to clipboard`);
+                showPopup(`Copied ${color} to clipboard`);
             });
 
             paletteDiv.appendChild(colorDiv);
@@ -80,6 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         document.body.removeChild(textarea);
     }
+
+    function showPopup(message) {
+        if (messageSent) {
+            messageSent.textContent = message;
+            messageSent.style.display = 'block'; // Ensure the element is visible
+        } else {
+            console.error('Element with id "message-sent" not found.');
+        }
+        if (popup) {
+            popup.style.display = 'flex'; // Show popup
+        } else {
+            console.error('Element with id "popup" not found.');
+        }
+    }
+
+    closePopupButton.addEventListener('click', () => {
+        if (popup) {
+            popup.style.display = 'none'; // Hide popup
+        }
+    });
 
     // Initial load
     const initialPaletteCount = parseInt(paletteCountInput.value);

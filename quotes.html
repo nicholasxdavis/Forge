@@ -4,11 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quote Generator - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
     <style>
+           .popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Could be more or less, depending on screen size */
+    height: 150px;
+    border-radius: 15px; /* Rounded corners */
+    display: flex; /* Added to use flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+
+body.dark-mode .popup {
+    background-color: rgba(0,0,0,0.8); /* Darker background for dark mode */
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Darker background for content */
+    color: #f1f1f1; /* Light text color for dark mode */
+}
+
+.close-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Add some space above the button */
+}
+
+body.dark-mode .close-button {
+    background-color: #444;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}
+
         .quote {
             font-size: 1.2em;
             font-style: italic;
@@ -25,7 +83,6 @@
         body.dark-mode .quote {
             background: #333;
         }
-
         .quote .copy-btn {
             background: #007bff;
             color: #fff;
@@ -36,31 +93,54 @@
             margin-left: 10px;
             font-size: 0.8em;
         }
-
         .quote .copy-btn:hover {
             background: #0056b3;
         }
-
         #quote-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
         }
-
         .intro-container {
             text-align: center;
         }
     </style>
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
     <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
     </header>
     <main>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <div id="message-sent">Your message has been sent successfully!</div>
+                <button class="close-button" id="close-popup">Close</button>
+            </div>
+        </div>
         <section id="introduction">
             <div class="intro-container">
                 <h2>Generate Random Quotes</h2>
@@ -78,8 +158,8 @@
             <div id="quote-container"></div>
         </section>
     </main>
-        <section id="footerprint">
-<p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+    <section id="footerprint">
+        <p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
     </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
@@ -94,6 +174,33 @@
         function redirectToHome() {
             window.location.href = "tools.html";
         }
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

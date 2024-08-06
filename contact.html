@@ -4,47 +4,347 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
-    <link rel="stylesheet" href="css/popups.css">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
+    <link rel="stylesheet" href="css/popups.css">
+<style>
+        /* Popup Styles */
+        .popup {
+            justify-content: center;
+            text-align: center;
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+        .popup-content {
+            justify-content: center;
+            text-align: center;
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            height: 200px;
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Added to use flexbox */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+        }
+        body.dark-mode .popup {
+            background-color: rgba(0,0,0,0.8); /* Darker background for dark mode */
+        }
+        body.dark-mode .popup-content {
+            background-color: #333; /* Darker background for content */
+            color: #f1f1f1; /* Light text color for dark mode */
+        }
+        .close-button {
+            background-color: var(--color-bg-button);
+            color: var(--color-text-dark);
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px; /* Add some space above the button */
+        }
+        .dark-mode .close-button {
+            background-color: var(--color-bg-button-dark);
+        }
+        /* Remove hover effect on the close button */
+        .close-button:hover {
+            background-color: var(--color-bg-button);
+        }
+        /* Card Layout Styles */
+
+        .card2 {
+            width: 450px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        body.dark-mode .card2 {
+            color: #333;
+        }
+        /* Contact Form Styles */
+        #contact {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if needed */
+    text-align: center; /* Ensure text alignment within paragraphs */
+    margin-bottom: 82px;
+}
+        .contact-form {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Center horizontally */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+}
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left; /* Center text */
+}
+.contact-form input,
+.contact-form textarea {
+    width: 400px;
+    max-width: 500px; /* Adjust as needed for wider inputs */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+    background-color: #fff; /* Light background for light mode */
+}
+
+/* Dark Mode Styles */
+
+.contact-form button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Restore transition */
+    margin-bottom: 20px; /* Add space below the button */
+}
+.contact p {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    text-align: center; /* Ensure text is centered within the paragraph */
+    margin: 0; /* Remove default margin if necessary */
+}
+.contact-form button:hover {
+    background-color: #2980b9; /* Adjust to your preferred hover color */
+}
+        /* Loading Animation Styles */
+        .load-wrapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .load-7 {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .square-holder {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .square {
+            width: 10px;
+            height: 10px;
+            background-color: #3498db;
+            animation: bounce 1.2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        /* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    /* Adjust card layout for mobile devices */
+    .card2 {
+        width: 90%; /* Use a percentage width for better responsiveness */
+        margin: 10px auto; /* Reduce margin for mobile devices */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    /* Adjust form elements for mobile devices */
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%; /* Make inputs and textareas full width */
+        max-width: none; /* Remove max-width restriction */
+    }
+
+    .contact-form button {
+        width: 100%; /* Make the button full width */
+    }
+}
+#lowerprint {
+    text-align: center;
+    justify-content: center;
+    margin-top: -75px;
+    padding-bottom: 102px;
+}
     </style>
 </head>
 <body>
     <header>
-        <img src="img/1logo.svg" alt="Forge by Blacnova Icon">
-        <nav>
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html" >Home</a></li>
-                <li><a href="tools.html" >Tools</a></li>
-                <li><a href="about.html" >About</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
     </header>
-    <main>
+    <main> 
         <section id="introduction">
             <div class="intro-container">
                 <h2>Contact Us</h2>
-                <p>Please fill out the form below and we'll get back to you shortly.</p>
+                 <p>Please fill out the form below and we'll get back to you shortly.</p>
             </div>
         </section>
-                
-    </main>
+            <section id=contact>
+            <div class="card2">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
 
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id=lowerprint>
+            <div>
+            <p>Our office hours are 7am to 7pm Pacific Time, Mon-Sun.</p>
+<p>You can also reach us directly at <a href="mailto:forge@blacnova.store" style="color: #3498db;">forge@blacnova.store</a>.</p>
+</div>
+        </section>
+    </main>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
-        <p>
-            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
-        </p>
+        <p><a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a></p>
     </footer>
+    <div id="overlay" class="overlay"></div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="load-wrapp" id="popup-loader">
+                <div class="load-7">
+                    <div class="square-holder">
+                        <div class="square"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="message-sent" style="display:none;">Your message has been sent successfully!</div>
+            <button class="close-button" id="close-popup">Close</button>
+        </div>
+    </div>
     <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
     <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const popup = document.getElementById('popup');
+            const popupLoader = document.getElementById('popup-loader');
+            const messageSent = document.getElementById('message-sent');
+
+            const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+            const currentTime = new Date().getTime();
+            const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+            if (lastSubmissionTime && (currentTime - lastSubmissionTime) < thirtyMinutes) {
+                popup.style.display = 'flex';
+                popupLoader.style.display = 'none';
+                messageSent.innerHTML = 'Please wait 30 minutes before submitting another request.';
+                messageSent.style.display = 'block';
+                return; // Prevent form submission
+            }
+
+            localStorage.setItem('lastSubmissionTime', currentTime);
+
+            popup.style.display = 'flex';
+            popupLoader.style.display = 'flex';
+            messageSent.style.display = 'none';
+
+            setTimeout(function() {
+                popupLoader.style.display = 'none';
+                messageSent.innerHTML = 'Your message has been sent successfully!';
+                messageSent.style.display = 'block';
+            }, 2000);
+        });
+
+        document.getElementById("close-popup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+        });
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

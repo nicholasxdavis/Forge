@@ -236,3 +236,254 @@ body.dark-mode #note-panel-icon {
             margin-top: -32px;
         }
 }
+        #counter {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            text-align: left;
+        }
+
+        body.dark-mode #counter {
+            color: var(--primary-color);
+        }
+
+        #info-icon {
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            margin-left: 5px;
+            margin-top: -2px;
+            cursor: pointer;
+        }
+
+        body.dark-mode #info-icon {
+            filter: invert(1);
+        }
+
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top of other content */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            height: 150px;
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Added to use flexbox */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+        }
+        .popup2 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top of other content */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+        .popup2-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            height: 150px;
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Added to use flexbox */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+        }
+                .popup-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between options */
+    padding-top: 20px; /* Adjust the top padding as needed */
+}
+        .option-button {
+    background-color: var(--primary-color);
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px; /* Optional: to make buttons rounded */
+    font-size: 13px; /* Optional: adjust font size if needed */
+}
+
+.option-button:hover {
+    background-color: var(--primary-hover);
+}
+        body.dark-mode .popup2 {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+        }
+
+        body.dark-mode .popup2-content {
+            background-color: #333; /* Darker background for content */
+            color: #f1f1f1; /* Light text color for dark mode */
+        }
+         .popup3 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top of other content */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+        .popup3-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            height: 150px;
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Added to use flexbox */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+        }
+
+        body.dark-mode .popup3 {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+        }
+
+        body.dark-mode .popup3-content {
+            background-color: #333; /* Darker background for content */
+            color: #f1f1f1; /* Light text color for dark mode */
+        }
+        body.dark-mode .popup {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+        }
+
+        body.dark-mode .popup-content {
+            background-color: #333; /* Darker background for content */
+            color: #f1f1f1; /* Light text color for dark mode */
+        }
+
+        .close-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Add some space above the button */
+        }
+
+        body.dark-mode .close-button {
+            background-color: #444;
+        }
+
+        .close-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Additional styles for the Add Note button */
+        #add-note-button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #add-note-button:hover {
+            background-color: #2980b9;
+        }
+#formatting-controls {
+    padding-top: 40px;
+    width: 990px;
+    margin-bottom: 0px; 
+}
+
+.formatting-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.formatting-button {
+    flex-grow: 1;
+    background-color: #3498db;
+    border: none;
+    cursor: pointer;
+    font-size: 1.0rem;
+    color: #FFF; /* Icon color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0; /* Add padding for a better appearance */
+    transition: background-color 0.3s ease;
+}
+
+#formatting-controls, .formatting-buttons {
+    border-radius: 5px;
+    overflow: hidden; /* Ensure children elements don't overflow */
+}
+.formatting-button:hover {
+    background-color: #2980b9;
+}
+
+.button-label {
+    margin-left: 8px; /* Space between icon and label */
+    font-size: 0.875rem; /* Adjust label size if needed */
+    color: #FFF; /* Label color */
+}
+
+body.dark-mode .formatting-button {
+    background: #444; /* Dark mode button background */
+}
+
+body.dark-mode .formatting-button:hover {
+    background-color: #2980b9; /* Dark mode hover effect */
+}
+
+body.dark-mode .button-label {
+    color: #FFF; /* Label color in dark mode */
+}
+/* Default icon color */
+.formatting-button i.fas {
+    color: #fff; /* Example color */
+}
+
+/* Dark mode icon color */
+body.dark-mode .formatting-button i.fas {
+    color: #3498db; /* Example dark mode color */
+}
+@media only screen and (max-width: 768px) {
+    #formatting-controls {
+        display: none;
+    }
+}
+#message-sent {
+    justify-content: center;
+    text-align: center;
+}

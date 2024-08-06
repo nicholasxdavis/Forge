@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Converter - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/styles.css">
@@ -12,8 +14,28 @@
 </head>
 
 <body>
-    <header>
+    <div id="overlay" class="overlay"></div>
+   <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
@@ -95,6 +117,33 @@
         document.getElementById('video-btn').addEventListener('click', function() {
             window.location.href = "video.html"; // Adjust as needed
         });
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

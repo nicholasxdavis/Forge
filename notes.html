@@ -4,66 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notepad - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
     <link rel="stylesheet" href="css/temp.css">
     <style>
-        #counter {
-    font-size: 12px;
-    margin-bottom: 10px;
-    color: var(--text-light);
-    text-align: left;
-}
-
-body.dark-mode #counter {
-    color: var(--primary-color);
-}
     </style>
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
     <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
     </header>
     <main>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <div id="message-sent">All data on Forge is stored locally for security purposes, ensuring the protection of our users. Please note that clearing your browser history will delete all data.</div>
+                <button class="close-button" id="close-popup">Close</button>
+            </div>
+        </div>
+        <!-- Download Popup -->
+        <div id="popup2" class="popup2">
+            <div class="popup2-content">
+                <div class="popup-options">
+                    <div class="option">
+                        <div id="message-sent">Download options:<br> ‎‎‎‎‎‎‎‎ㅤ</div>
+                        <label for="download">Download Selected:</label>
+                        <button class="option-button" id="download">Download As</button>
+                    </div>
+                    <div class="option">
+                        <label for="download-all">Download All:</label>
+                        <button class="option-button" id="download-all">Download As</button>
+                    </div>
+                </div>
+                <button class="close-button" id="cancel-popup2">Cancel</button>
+            </div>
+        </div>
+        <!-- Print Popup -->
+        <div id="popup3" class="popup2">
+            <div class="popup2-content">
+                <div class="popup-options">
+                    <div class="option">
+                        <div id="message-sent">Printing options:<br> ‎‎‎‎‎‎‎‎ㅤ</div>
+                        <label for="print">Print Selected:</label>
+                        <button class="option-button" id="print">Print As</button>
+                    </div>
+                    <div class="option">
+                        <label for="print-all">Print All:</label>
+                        <button class="option-button" id="print-all">Print As</button>
+                    </div>
+                </div>
+                <button class="close-button" id="cancel-popup3">Cancel</button>
+            </div>
+        </div>
+
         <section id="introduction">
             <div class="intro-container">
                 <h2>Notes</h2>
-                <p>Create and manage your notes efficiently.<br>Download notes locally.</p>
+                <p>An all-in-one place to create and manage your notes efficiently.<br>
+                Locally Stored: <img id="info-icon" src="img/info.svg" alt="Info Icon" title="Information"></p>
             </div>
         </section>
+
+        <section id="formatting-controls">
+            <div class="formatting-buttons">
+                <button class="formatting-button" id="download-button" title="Download">
+                    <i class="fas fa-download"></i>
+                    <span class="button-label">Download</span>
+                </button>
+                <button class="formatting-button" id="print-button" title="Print">
+                    <i class="fas fa-print"></i>
+                    <span class="button-label">Print</span>
+                </button>
+                <button class="formatting-button" id="font-family" title="Font Family">
+                    <i class="fas fa-font"></i>
+                    <span class="button-label">Font Family</span>
+                </button>
+                <button class="formatting-button" id="font-size" title="Font Size">
+                    <i class="fas fa-text-height"></i>
+                    <span class="button-label">Font Size</span>
+                </button>
+                <button class="formatting-button" id="font-style" title="Font Style">
+                    <i class="fas fa-italic"></i>
+                    <span class="button-label">Font Style</span>
+                </button>
+                <button class="formatting-button" id="text-color" title="Text Color">
+                    <i class="fas fa-tint"></i>
+                    <span class="button-label">Text Color</span>
+                </button>
+                <button class="formatting-button" id="background-color" title="Background Color">
+                    <i class="fas fa-palette"></i>
+                    <span class="button-label">Background Color</span>
+                </button>
+                <button class="formatting-button" id="text-align" title="Text Alignment">
+                    <i class="fas fa-align-left"></i>
+                    <span class="button-label">Text Alignment</span>
+                </button>
+            </div>
+        </section>
+
         <div class="container">
             <aside id="note-panel">
-    <h3>Saved Notes</h3>
-     <img id="note-panel-icon" src="img/up.svg" alt="Note Panel Icon" onclick="toggleIcon()">
-    <ul id="note-list">
-        <li data-id="1">
-            <span class="note-name">Layer 1</span>
-            <input type="text" class="note-name-input">
-            <button class="edit-icon" data-index="1" title="Edit">
-                <img src="img/edit.svg" alt="Edit Icon">
-            </button>
-            <button class="delete-icon" data-index="1" title="Delete">
-                <i class="fas fa-trash"></i>
-            </button>
-        </li>
-        <!-- Additional layers... -->
-    </ul>
-</aside>
-
+                <h3>Saved Notes</h3>
+                <img id="note-panel-icon" src="img/up.svg" alt="Note Panel Icon" onclick="toggleIcon()">
+                <ul id="note-list">
+                    <li data-id="1">
+                        <span class="note-name">Layer 1</span>
+                        <input type="text" class="note-name-input">
+                        <button class="edit-icon" data-index="1" title="Edit">
+                            <img src="img/edit.svg" alt="Edit Icon">
+                        </button>
+                        <button class="delete-icon" data-index="1" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </li>
+                    <!-- Additional layers... -->
+                </ul>
+                <button id="add-note-button">+</button> <!-- Add Note Button -->
+            </aside>
             <section id="editor">
-    <textarea id="notepad" placeholder="Type your text here..."></textarea>
-    <div id="counter">Words: 0 | Characters: 0</div>
-    <button id="save-button">Save</button>
-</section>
+                <textarea id="notepad" placeholder="Type your text here..."></textarea>
+                <div id="counter">Words: 0 | Characters: 0</div>
+                <button id="save-button">Save</button>
+            </section>
         </div>
     </main>
     <section id="footerprint">
-<p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
+        <p><em>Last Update:</em> <span style="color: #3498db;">8/5/2024</span>.</p>
     </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
@@ -76,10 +167,63 @@ body.dark-mode #counter {
     </footer>
     <script src="js/script.js"></script>
     <script src="js/note.js"></script>
+    <script src="js/format.js"></script>
     <script>
         function redirectToHome() {
             window.location.href = "tools.html";
         }
+
+        document.getElementById('info-icon').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'flex';
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Ensure popups are handled in the script
+        document.getElementById('download-button').addEventListener('click', () => {
+            document.getElementById('popup2').style.display = 'flex';
+        });
+
+        document.getElementById('print-button').addEventListener('click', () => {
+            document.getElementById('popup3').style.display = 'flex';
+        });
+
+        document.getElementById('cancel-popup2').addEventListener('click', () => {
+            document.getElementById('popup2').style.display = 'none';
+        });
+
+        document.getElementById('cancel-popup3').addEventListener('click', () => {
+            document.getElementById('popup3').style.display = 'none';
+        });
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

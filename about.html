@@ -3,48 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Forge by Blacnova</title>
+    <title>About Us - Forge by Blacnova</title>
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
-    <link rel="stylesheet" href="css/popups.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-    </style>
+   <style>
+#introduction2 {
+    padding-bottom: 100px;
+}
+</style>
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
     <header>
-        <img src="img/1logo.svg" alt="Forge by Blacnova Icon">
-        <nav>
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="tools.html">Tools</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
     </header>
-    <div id="data-collection-popup" class="popup">
-        <div class="popup-content">
-    <h3>Welcome to Forge by Blacnova!</h3>
-    <p>Forge by Blacnova is a versatile platform that combines creativity and security tools into one seamless experience.</p>
-    <p>It's crafted to meet the diverse needs of users seeking innovative solutions for generating names and colors, encrypting files, managing tasks efficiently, and more.</p>
-    <button id="popup-opt-in-btn">Get Started</button>
-    <button id="popup-opt-out-btn">Close</button>
-</div>
-    </div>
-
     <main>
-        <section id="introduction">
+         <section id="introduction">
             <div class="intro-container">
                 <h2>About Us</h2>
-                <p>Filler Text</p>
             </div>
         </section>
-                
-    </main>
+        <section id="introduction2">
+            <div class="intro-container2">
+<p>Welcome to Forge by Blacnova, where innovation meets efficiency. We are incredibly excited to unveil a platform that has been a long-standing dream and dedication of ours. Forge by Blacnova is not just a toolset; it is a comprehensive ecosystem designed to cater to a diverse array of needs and professions. Whether you're a developer, producer, engineer, student, creator, entrepreneur, or anyone in between, our platform is tailored to provide you with the tools you need to excel.</p>
+
+<p>Our mission at Forge by Blacnova is to offer a collection of high-quality, reliable tools that enhance productivity and streamline workflows. We understand that in today's fast-paced world, having access to the right resources can make all the difference. That's why we have meticulously crafted a suite of tools that not only meet but exceed the expectations of our users. Each tool is designed with the highest standards in mind, ensuring that you have the best possible experience while using our platform.</p>
+
+<p>Our journey began with the vision to create a single destination where users could find a variety of tools that seamlessly integrate into their daily tasks. We wanted to build a place where quality and efficiency come together to provide a cohesive experience. After years of planning, development, and dedication, we are proud to say that Forge by Blacnova is now a reality. Our official launch on September 1st, 2024 marks the beginning of a new chapter, and we are committed to delivering excellence every step of the way.</p>
+
+<p>Forge by Blacnova is the latest initiative from Blacnova, a company with a rich history of creating and open-sourcing groundbreaking projects. Blacnova has been at the forefront of technological innovation, and our experience in the field is reflected in every aspect of Forge. Our parent company’s legacy of excellence and commitment to open-source development has been a driving force behind the creation of this platform. We carry forward this legacy with the goal of expanding our toolset and continuously improving our offerings to better serve our community.</p>
+
+<p>As we embark on this exciting journey, we are eager to evolve and grow alongside our users. We believe in fostering a dynamic environment where feedback and innovation go hand in hand. Our team is dedicated to listening to your needs, understanding your challenges, and working tirelessly to bring you new and improved tools. At Forge by Blacnova, our commitment to quality and user satisfaction is unwavering, and we look forward to building a lasting relationship with our users.</p>
+
+<p>Thank you for being a part of the Forge by Blacnova community. We invite you to explore our platform, make the most of our tools, and join us as we continue to expand and enhance our offerings. Together, let's forge a path to greater efficiency, creativity, and success.</p>
+
+</div>
+</section>
+</main>
+
 
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
@@ -55,6 +74,33 @@
     <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
     <script>
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

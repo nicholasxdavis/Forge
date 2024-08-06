@@ -1,20 +1,3 @@
-:root {
-    --background-light: #f0f5f9;
-    --background-dark: #2c3e50;
-    --text-light: #333333;
-    --text-dark: #ffffff;
-    --primary-color: #3498db;
-    --primary-hover: #2980b9;
-    --secondary-color: #9b59b6;
-    --secondary-color-dark: #9b59b6;
-    --card-background-light: #ffffff;
-    --card-background-dark: #34495e;
-    --card-shadow-light: rgba(0, 0, 0, 0.1);
-    --card-shadow-dark: rgba(0, 0, 0, 0.5);
-    --link-color: #3498db; /* Add this line */
-    --link-hover-color: #2980b9; /* Add this line */
-}
-
 .card-container {
     display: flex;
     justify-content: center;

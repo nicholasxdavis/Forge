@@ -1,20 +1,8 @@
-function toggleIcon() {
-    const icon = document.getElementById('note-panel-icon');
-    const noteList = document.getElementById('note-list');
-
-    if (icon.src.includes('up.svg')) {
-        icon.src = 'img/down.svg';
-        noteList.style.display = 'none'; // Hide notes
-    } else {
-        icon.src = 'img/up.svg';
-        noteList.style.display = 'block'; // Show notes
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     const notepad = document.getElementById('notepad');
     const noteList = document.getElementById('note-list');
     const saveButton = document.getElementById('save-button');
+    const addNoteButton = document.getElementById('add-note-button');
     const counter = document.getElementById('counter');
 
     // Function to update word and character count
@@ -157,11 +145,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Add a new note
+    const addNote = () => {
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+        const newNote = { title: `Note ${notes.length + 1}`, content: '' };
+        notes.push(newNote);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNotes();
+    };
+
     // Initialize notes
     renderNotes();
 
     // Save note when clicking the save button
     saveButton.addEventListener('click', saveNote);
+
+    // Add note when clicking the add note button
+    addNoteButton.addEventListener('click', addNote);
 
     // Initial counter update on page load
     updateCounter();

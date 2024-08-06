@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deadline Tracker - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome -->
     <link rel="stylesheet" href="css/styles.css">
@@ -183,21 +185,116 @@
                 width: 100%; /* Full width on small screens */
             }
         }
+                #info-icon {
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            margin-left: 5px;
+            margin-top: -2px;
+            cursor: pointer;
+        }
+
+        body.dark-mode #info-icon {
+            filter: invert(1);
+        }
+
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top of other content */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            height: 150px;
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Added to use flexbox */
+            flex-direction: column; /* Arrange children in a column */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+        }
+
+        body.dark-mode .popup {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+        }
+
+        body.dark-mode .popup-content {
+            background-color: #333; /* Darker background for content */
+            color: #f1f1f1; /* Light text color for dark mode */
+        }
+
+        .close-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Add some space above the button */
+        }
+
+        body.dark-mode .close-button {
+            background-color: #444;
+        }
+
+        .close-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
     <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
         <button id="theme-toggle">
             <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
         </button>
     </header>
 
     <main>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <div id="message-sent">All data on Forge is stored locally for security purposes, ensuring the protection of our users. Please note that clearing your browser history will delete all data.</div>
+                <button class="close-button" id="close-popup">Close</button>
+            </div>
+        </div>
         <section id="introduction">
             <div class="intro-container">
                 <h2>Deadlines</h2>
-                <p>Track your deadlines and stay organized.</p>
+                <p>Track your deadlines and stay organized.<br>
+                Locally Stored: <img id="info-icon" src="img/info.svg" alt="Info Icon" title="Information"></p>
             </div>
         </section>
         <div class="deadline-container">
@@ -230,6 +327,14 @@
         function redirectToHome() {
             window.location.href = "tools.html";
         }
+
+        document.getElementById('info-icon').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'flex';
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -342,6 +447,33 @@
             // Initial load
             updateDeadlineList();
         });
+    </script>
+        <script>
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
     </script>
 </body>
 </html>

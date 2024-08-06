@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const regenerateBtn = document.getElementById('regenerate-btn');
     const quoteCountInput = document.getElementById('quote-count');
     const quoteContainer = document.getElementById('quote-container');
+    const popup = document.getElementById('popup');
+    const closePopupButton = document.getElementById('close-popup');
+    const messageSent = document.getElementById('message-sent');
 
     regenerateBtn.addEventListener('click', () => {
         const quoteCount = parseInt(quoteCountInput.value);
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add click event to copy quote
         quoteDiv.addEventListener('click', () => {
             copyToClipboard(`"${quote}" - ${author}`);
-            alert(`Copied: "${quote}" - ${author}`);
+            showPopup(); // Display simplified popup message
         });
 
         quoteContainer.appendChild(quoteDiv);
@@ -51,6 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         document.body.removeChild(textarea);
     }
+
+    function showPopup() {
+        if (messageSent) {
+            messageSent.textContent = "Copied quote"; // Simplified message
+            messageSent.style.display = 'block'; // Ensure the element is visible
+        } else {
+            console.error('Element with id "message-sent" not found.');
+        }
+        if (popup) {
+            popup.style.display = 'flex'; // Show popup
+        } else {
+            console.error('Element with id "popup" not found.');
+        }
+    }
+
+    closePopupButton.addEventListener('click', () => {
+        if (popup) {
+            popup.style.display = 'none'; // Hide popup
+        }
+    });
 
     // Initial load
     const initialQuoteCount = parseInt(quoteCountInput.value);
