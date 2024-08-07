@@ -521,3 +521,79 @@ header button {
     position: relative; /* Ensure elements are positioned relative to header */
     z-index: 999; /* Set z-index to 999 for all header elements */
 }
+.cookie-popup {
+    z-index: 99;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #e0e6eb;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    display: none; /* Hidden by default */
+    /* Add the following properties */
+    border-top: 3px solid #3498db; /* Blue strip on top */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.cookie-popup::before {
+    content: "";
+    display: block;
+    height: 3px; /* Height of the blue strip */
+    background-color: #3498db; /* Blue color */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+body.dark-mode .cookie-popup {
+    background: #333; /* Dark background */
+    color: #ffffff; /* Light text color */
+}
+
+body.dark-mode .cookie-popup a {
+    color: #3498db; /* Primary color */
+}
+
+body.dark-mode .cookie-popup button {
+    background: #3498db; /* Primary color */
+    color: #ffffff; /* Light text color */
+}
+
+body.dark-mode .cookie-popup button:hover {
+    background: #2980b9; /* Primary hover color */
+}
+
+body.dark-mode .cookie-popup p {
+    color: #fff;
+}
+
+.cookie-popup p {
+    color: #333;
+    margin: 0;
+    display: inline;
+}
+
+.cookie-popup a {
+    color: #3498db;
+    text-decoration: none;
+}
+.cookie-popup a:hover {
+    color: #2980b9;
+}
+
+.cookie-popup button {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.cookie-popup button:hover {
+    background: #2980b9;
+}

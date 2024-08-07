@@ -62,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
             colorCode.textContent = color;
             colorDiv.appendChild(colorCode);
 
+            // Add tooltip for hover message
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = 'Copy'; // Tooltip message
+            colorDiv.appendChild(tooltip);
+
             // Add click event to copy color code
             colorDiv.addEventListener('click', () => {
                 copyToClipboard(color);
