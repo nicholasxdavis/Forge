@@ -282,18 +282,6 @@
     </header>
 
     <main>
-        <style> 
-            @media (max-width: 767px) {
-    #deadline-date, #deadline-time {
-        width: 100%; /* Full width on small screens */
-        -webkit-appearance: none; /* Reset default styling */
-    }
-
-    #add-deadline {
-        width: 100%; /* Full width on small screens */
-    }
-}
-        </style>
         <div id="popup" class="popup">
             <div class="popup-content">
                 <div id="message-sent">All data on Forge is stored locally for security purposes, ensuring the protection of our users. Please note that clearing your browser history will delete all data.</div>
@@ -540,27 +528,53 @@ body.dark-mode .share-text {
         });
 
     </script>
-    <script>
-        // Function to simulate clicking and closing an input field
-        function autoFocusAndBlur(inputId) {
-            const input = document.getElementById(inputId);
-            if (input) {
-                input.focus(); // Focus on the input
-                setTimeout(() => {
-                    input.blur(); // Remove focus from the input after a short delay
-                }, 100); // Adjust the delay if needed
-            }
-        }
+   <script>
+    // Function to set the value of the input fields
+    function setInputValues(dateInputId, timeInputId) {
+        const dateInput = document.getElementById(dateInputId);
+        const timeInput = document.getElementById(timeInputId);
 
-        // Call the function for date and time inputs
-        document.addEventListener('DOMContentLoaded', () => {
+        if (dateInput && timeInput) {
+            const now = new Date();
+
+            // Format date as YYYY-MM-DD
+            const formattedDate = now.toISOString().split('T')[0];
+            dateInput.value = formattedDate;
+
+            // Format time as HH:MM
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}`;
+            timeInput.value = formattedTime;
+        }
+    }
+
+    // Function to simulate clicking and closing an input field
+    function autoFocusAndBlur(inputId) {
+        const input = document.getElementById(inputId);
+        if (input) {
+            input.focus(); // Focus on the input
+            setTimeout(() => {
+                input.blur(); // Remove focus from the input after a short delay
+            }, 100); // Adjust the delay if needed
+        }
+    }
+
+    // Call the function for date and time inputs
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            // Set current date and time
+            setInputValues('deadline-date', 'deadline-time');
+            
             setTimeout(() => {
                 autoFocusAndBlur('deadline-date');
                 setTimeout(() => {
                     autoFocusAndBlur('deadline-time');
                 }, 200); // Slight delay before focusing on the time input
             }, 200); // Delay before focusing on the date input
-        });
-    </script>
+        }, 200); // Delay before setting the date and time inputs
+    });
+</script>
+
 </body>
 </html>
