@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to update word and character count
     const updateCounter = () => {
-        const text = notepad.innerHTML.trim();
+        const text = notepad.value.trim();
         const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
         const charCount = text.length;
         counter.textContent = `Words: ${wordCount} | Characters: ${charCount}`;
@@ -19,30 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save note to localStorage
     const saveNote = () => {
         const notes = JSON.parse(localStorage.getItem('notes')) || [];
-        const noteText = notepad.innerHTML.trim();
+        const noteText = notepad.value.trim();
         const selectedNoteIndex = parseInt(localStorage.getItem('selectedNoteIndex'), 10);
 
         if (noteText) {
             if (!isNaN(selectedNoteIndex) && selectedNoteIndex >= 0 && selectedNoteIndex < notes.length) {
+                // Update the content of the selected note
                 notes[selectedNoteIndex].content = noteText;
                 localStorage.removeItem('selectedNoteIndex');
             } else {
+                // Check if content already exists
                 const existingNote = notes.find(note => note.content === noteText);
                 if (existingNote) {
                     alert("A note with the same content already exists.");
-                    return;
+                    return; // Prevent saving duplicate content
                 }
 
+                // Determine the highest note number and increment
                 const highestNumber = notes.reduce((acc, note) => {
                     const number = parseInt(note.title.replace('Note ', '')) || 0;
                     return Math.max(acc, number);
-                }, 0);
+                }, 0); 
 
+                // Save new note with incremented title
                 notes.push({ title: `Note ${highestNumber + 1}`, content: noteText });
             }
             localStorage.setItem('notes', JSON.stringify(notes));
-            notepad.innerHTML = '';
-            updateCounter();
+            notepad.value = ''; // Clear the notepad
+            updateCounter(); // Reset the counter
             renderNotes();
         }
     };
@@ -50,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render notes from localStorage
     const renderNotes = () => {
         const notes = JSON.parse(localStorage.getItem('notes')) || [];
-        noteList.innerHTML = '';
+        noteList.innerHTML = ''; // Clear existing notes
 
         notes.forEach((note, index) => {
             const li = document.createElement('li');
@@ -66,13 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 </button>
             `;
 
+            // Delete note
             li.querySelector('.delete-icon').addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Prevent click from triggering select
                 deleteNote(index);
             });
 
+            // Edit note name
             li.querySelector('.edit-icon').addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Prevent click from triggering select
                 const listItem = e.currentTarget.closest('li');
                 const input = listItem.querySelector('.note-name-input');
                 const span = listItem.querySelector('.note-name');
@@ -81,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.value = span.textContent;
                 input.focus();
 
+                // Blur event listener to save changes
                 input.addEventListener('blur', function() {
                     span.textContent = this.value;
                     span.style.display = 'inline';
@@ -88,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     saveUpdatedNoteName(index, this.value);
                 });
 
+                // Keydown event listener for Enter key
                 input.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') {
                         this.blur();
@@ -95,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
+            // Toggle selected note
             li.addEventListener('click', () => {
                 loadNote(index);
                 const selectedNote = document.querySelector('#note-list li.selected');
@@ -112,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadNote = (index) => {
         const notes = JSON.parse(localStorage.getItem('notes')) || [];
         if (index >= 0 && index < notes.length) {
-            notepad.innerHTML = notes[index].content;
+            notepad.value = notes[index].content;
             localStorage.setItem('selectedNoteIndex', index);
-            updateCounter();
+            updateCounter(); // Update the counter with the loaded note's content
         }
     };
 
@@ -145,72 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
         renderNotes();
     };
 
-    // Font Family
-    document.getElementById('font-family-select').addEventListener('change', (event) => {
-        notepad.style.fontFamily = event.target.value;
-    });
-
-    // Font Size
-    const fontSizeSlider = document.getElementById('font-size-slider');
-    const fontSizeInput = document.getElementById('font-size-input');
-
-    fontSizeSlider.addEventListener('input', (event) => {
-        const size = event.target.value;
-        notepad.style.fontSize = `${size}px`;
-        fontSizeInput.value = size;
-    });
-
-    fontSizeInput.addEventListener('input', (event) => {
-        const size = event.target.value;
-        notepad.style.fontSize = `${size}px`;
-        fontSizeSlider.value = size;
-    });
-
-    // Font Style
-    const fontStyleSelect = document.getElementById('font-style-select');
-    fontStyleSelect.addEventListener('change', (event) => {
-        const selectedStyle = event.target.value;
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-
-        // Apply the style to selected text
-        if (selection.toString().length > 0) {
-            if (selectedStyle === 'italic') {
-                document.execCommand('italic');
-            } else if (selectedStyle === 'bold') {
-                document.execCommand('bold');
-            } else {
-                document.execCommand('removeFormat');
-            }
-        } else {
-            // Apply the style to the whole notepad if no text is selected
-            notepad.style.fontStyle = selectedStyle === 'italic' ? 'italic' : 'normal';
-            notepad.style.fontWeight = selectedStyle === 'bold' ? 'bold' : 'normal';
-        }
-    });
-
-    // Text Color
-    textColorPicker.on('save', (color) => {
-        notepad.style.color = color.toRGBA().toString();
-    });
-
-    // Background Color
-    backgroundColorPicker.on('save', (color) => {
-        notepad.style.backgroundColor = color.toRGBA().toString();
-    });
-
-    // Text Alignment
-    document.getElementById('text-align-select').addEventListener('change', (event) => {
-        notepad.style.textAlign = event.target.value;
-    });
-
-    // Initialize notes and formatting options
+    // Initialize notes
     renderNotes();
-    updateCounter();
 
     // Save note when clicking the save button
     saveButton.addEventListener('click', saveNote);
 
     // Add note when clicking the add note button
     addNoteButton.addEventListener('click', addNote);
+
+    // Initial counter update on page load
+    updateCounter();
 });

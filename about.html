@@ -7,9 +7,47 @@
     <link rel="icon" href="img/logo.png" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
+
    <style>
 #introduction2 {
-    padding-bottom: 100px;
+}
+.social-icons {
+    display: flex;
+    gap: 15px; /* Space between icons */
+    justify-content: center; /* Center the icons */
+    margin-top: 20px; /* Space above the icons */
+}
+
+.social-icon {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Adjust the size as needed */
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+
+.intro-content {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between logo and text */
+}
+ @media (max-width: 600px) {
+   .logo-img {
+    display: none;
+}
+    #introduction2 {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+.logo-img {
+    max-width: 150px; /* Adjust size as needed */
+}
+
+.intro-text {
+    flex: 1; /* Take up remaining space */
 }
 </style>
 </head>
@@ -21,8 +59,7 @@
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="tools.html">Tools</a></li>
+                <li><a href="index.html">Tools</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -30,9 +67,8 @@
         <!-- Mobile Navigation -->
         <nav class="mobile-nav">
             <ul>
-                <li><a href="index.html">Homepage</a></li>
-                <li><a href="tools.html">Our Tools</a></li>
-                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="index.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
@@ -41,32 +77,78 @@
         </button>
     </header>
     <main>
-         <section id="introduction">
+        <style> 
+#introduction-icon {
+    margin-bottom: 10px; /* Space between icon and heading */
+    max-width: 100px; /* Adjust the size as needed */
+    margin-left: -25px;
+    display: none; /* Hidden by default */
+}
+
+@media (max-width: 600px) {
+    #introduction-icon {
+        display: block; /* Show on mobile devices */
+    }
+}
+
+.intro-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Space between icon and heading */
+}
+        </style>
+<section id="introduction">
             <div class="intro-container">
-                <h2>About Us</h2>
+                <img id="introduction-icon" src="img/headerlogo.svg" alt="Introduction Icon">
+                <h2>What is Forge?</h2>
             </div>
         </section>
         <section id="introduction2">
-            <div class="intro-container2">
-<p>Welcome to Forge by Blacnova, where innovation meets efficiency. We are incredibly excited to unveil a platform that has been a long-standing dream and dedication of ours. Forge by Blacnova is not just a toolset; it is a comprehensive ecosystem designed to cater to a diverse array of needs and professions. Whether you're a developer, producer, engineer, student, creator, entrepreneur, or anyone in between, our platform is tailored to provide you with the tools you need to excel.</p>
+            <div class="intro-content">
+                <img src="img/headerlogo.svg" alt="Forge by Blacnova Logo" class="logo-img">
+                <div class="intro-text">
+                    <p>Forge by Blacnova is a comprehensive ecosystem designed to meet the diverse needs of professionals and enthusiasts alike. Our platform seamlessly blends cutting-edge innovation with practical functionality, offering an all-encompassing suite of advanced tools that empower individuals and teams. With robust features and an intuitive interface, users can achieve their goals, streamline workflows, and unlock new potentials in their projects. Each tool is engineered for precision and ease, ensuring an unparalleled user experience and driving success across all endeavors. By integrating the latest technologies and user-centric designs, Forge provides a dynamic environment that adapts to the evolving demands of modern work and creative processes, fostering growth and innovation.</p>
+                </div>
+            </div>
+            <p>Imagine having a toolkit that’s not only advanced but also incredibly intuitive—where every feature is crafted to streamline your workflow and unlock new potentials. Whether tackling complex tasks or pursuing creative projects, Forge delivers the precision and ease you need. With Forge by Blacnova, you’re not just using a tool; you’re partnering with a platform that supports your vision and helps you excel. Forge enhances productivity, explores creative horizons, and transforms challenges into opportunities for success. Embrace the future of your projects with confidence, and let Forge elevate your work to new heights, making every task more efficient and every goal more attainable.</p>
 
-<p>Our mission at Forge by Blacnova is to offer a collection of high-quality, reliable tools that enhance productivity and streamline workflows. We understand that in today's fast-paced world, having access to the right resources can make all the difference. That's why we have meticulously crafted a suite of tools that not only meet but exceed the expectations of our users. Each tool is designed with the highest standards in mind, ensuring that you have the best possible experience while using our platform.</p>
+    <section id="introduction">
+    <div class="intro-container">
+    <h2>Our Mission</h2>
+    </div>
+    </section>
+     <p>At Forge by Blacnova, our mission is to revolutionize digital tool access and usage by providing efficient, free, and user-friendly solutions tailored to diverse professions. We understand the unique challenges faced by students, business owners, content creators, musicians, graphic designers, artists, storytellers, and authors—each needing specific tools to enhance their work. Our goal is to be a one-stop destination where professionals find tools that streamline workflows, boost productivity, and foster creativity. By prioritizing ease of use and accessibility, we aim to empower individuals and teams to achieve their goals with minimal hassle and maximum efficiency.</p>
+                <section id="introduction">
+            <div class="intro-container">
+                <h2>Our Story</h2>
+            </div>
+        </section>
+        <p>Forge began with a vision to create a more integrated set of digital tools. What started as a collection of disparate tools and platforms evolved into Forge, conceived and developed by Nicholas Xander Davis. Frustrated by juggling multiple websites and interfaces, Nicholas launched Forge with Nova — PNG Converter on November 10, 2023, marking the beginning of our journey. Since then, Forge has grown exponentially, expanding to include a wide array of tools designed to meet various digital needs, from file conversions to task management. Our development is characterized by a commitment to continuous improvement, with regular updates and new features enhancing functionality and user experience.</p>
 
-<p>Our journey began with the vision to create a single destination where users could find a variety of tools that seamlessly integrate into their daily tasks. We wanted to build a place where quality and efficiency come together to provide a cohesive experience. After years of planning, development, and dedication, we are proud to say that Forge by Blacnova is now a reality. Our official launch on September 1st, 2024 marks the beginning of a new chapter, and we are committed to delivering excellence every step of the way.</p>
+        <section id="introduction">
+            <div class="intro-container">
+                <h2>Our Team</h2>
+            </div>
+        </section>
+        <p>Forge is the result of Nicholas Xander Davis’s dedicated efforts in developing, designing, and maintaining the platform. What began as a personal need for efficient digital tools has evolved into a comprehensive suite serving a global audience. Alongside Nicholas, we benefit from the expertise of public API developers who have significantly contributed to our platform’s capabilities. Special thanks to Keith Armstrong, Eric P, and Luke Peavey for their instrumental contributions in integrating powerful APIs into our tools, enhancing performance and functionality. Our team combines innovation and dedication, committed to providing high-quality tools and support to our users.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
 
-<p>Forge by Blacnova is the latest initiative from Blacnova, a company with a rich history of creating and open-sourcing groundbreaking projects. Blacnova has been at the forefront of technological innovation, and our experience in the field is reflected in every aspect of Forge. Our parent company’s legacy of excellence and commitment to open-source development has been a driving force behind the creation of this platform. We carry forward this legacy with the goal of expanding our toolset and continuously improving our offerings to better serve our community.</p>
-
-<p>As we embark on this exciting journey, we are eager to evolve and grow alongside our users. We believe in fostering a dynamic environment where feedback and innovation go hand in hand. Our team is dedicated to listening to your needs, understanding your challenges, and working tirelessly to bring you new and improved tools. At Forge by Blacnova, our commitment to quality and user satisfaction is unwavering, and we look forward to building a lasting relationship with our users.</p>
-
-<p>Thank you for being a part of the Forge by Blacnova community. We invite you to explore our platform, make the most of our tools, and join us as we continue to expand and enhance our offerings. Together, let's forge a path to greater efficiency, creativity, and success.</p>
-
-</div>
-</section>
-</main>
-
-        <div id="cookie-popup" class="cookie-popup">
-    <p>This website relies on cookies to ensure you get the best experience. <br><a href="privacypolicy.html">Learn more</a></p>
-    <button id="cookie-popup-btn">Ok!</button>
+        </section>
+    </main>
+    <div id="cookie-popup" class="cookie-popup">
+        <p>This website relies on cookies to ensure you get the best experience. <br><a href="privacypolicy.html">Learn more</a></p>
+        <button id="cookie-popup-btn">Ok!</button>
     </div>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
@@ -77,8 +159,6 @@
     <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
     <script>
-    </script>
-        <script>
        function toggleMobileMenu() {
             const mobileNav = document.querySelector('nav.mobile-nav');
             const menuList = mobileNav.querySelector('ul');
@@ -103,7 +183,6 @@
             menuList.classList.remove('menu-open');
             this.style.display = 'none';
         });
-
     </script>
 </body>
 </html>

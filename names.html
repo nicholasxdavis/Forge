@@ -27,8 +27,7 @@
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="tools.html">Tools</a></li>
+                <li><a href="index.html">Tools</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -36,8 +35,7 @@
         <!-- Mobile Navigation -->
         <nav class="mobile-nav">
             <ul>
-                <li><a href="index.html">Homepage</a></li>
-                <li><a href="tools.html" class="active">Our Tools</a></li>
+                <li><a href="index.html" class="active">Our Tools</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
@@ -69,6 +67,72 @@
                 </div>
             </div>
         </section>
+        <style> 
+            .overlay-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height, adjust as needed */
+    width: 100%; /* Full width of its container */
+}
+.overlay {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: fixed; /* Ensure it covers the viewport */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full viewport width */
+    background-color: rgba(0, 0, 0, 0.5); /* Slight dark overlay */
+    z-index: 999; /* Ensure it's on top of other content */
+    display: none; /* Hidden by default */
+}
+/* Style for the name-overlay */
+.name-overlay {
+    position: relative; /* Position relative to contain the overlay */
+    display: block; /* Ensure each name is on a new line */
+     background: rgba(0, 0, 0, 0.5); /* Overlay background */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 2rem;
+    text-align: center;
+    margin: 5px auto; /* Space between each name and center horizontally */
+    width: 300px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    line-height: 50px; /* Center text vertically */
+}
+
+/* Style for the overlay that says "copy" */
+.copy-overlay {
+    position: absolute; /* Position absolutely within the name-overlay */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center the text */
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background for the overlay */
+    color: #fff; /* White text */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size for the "copy" text */
+    text-align: center; /* Center text horizontally */
+    line-height: 1.2; /* Adjust line height */
+    height: 40%; /* 40% of the height of the name-overlay */
+    display: flex; /* Use flexbox to center text */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    box-sizing: border-box; /* Include padding in height calculation */
+    width: 20%; /* Adjust width for better visibility */
+    display: none; /* Hidden by default */
+}
+
+
+/* Show the overlay when hovering over the name */
+.name-overlay:hover .copy-overlay {
+    display: block; /* Show the overlay on hover */
+}
+
+        </style>
         <section id="gen">
             <p>Hi, Hello!<br>
                 Hi, Hello!<br>
@@ -79,6 +143,55 @@
         <div id="gen" style="display: none;"></div>
         <div id="map" style="display: none; width: 100%; height: 500px;"></div>
     </main>
+        <style>
+.share-section {
+    display: flex;
+    flex-direction: column; /* Stack the text and icons vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Space between the text and icons */
+    margin-top: 10px; /* Space above the section */
+}
+body.dark-mode .share-text {
+    color: #fff; /* Adjust color as needed */
+}
+.share-text {
+    padding-bottom: -10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+    font-size: 18px; /* Adjust as needed */
+    color: #333; /* Adjust color as needed */
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+.share-icon {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Adjust the size as needed */
+    text-decoration: none;
+        padding-bottom: 15px;
+}
+
+.share-icon:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+</style>
+<div class="share-section">
+            <p class="share-text">Share this page</p>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="share-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
         <section id="footerprint">
 <p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
     </section>
@@ -107,7 +220,7 @@
     <script src="js/names.js"></script>
     <script>
         function redirectToHome() {
-            window.location.href = "tools.html";
+            window.location.href = "index.html";
         }
     </script>
         <script>

@@ -24,8 +24,16 @@ async function displayNames() {
     const genSection = document.getElementById('gen');
 
     const generatedNames = await generateNames(nameCount, gender);
-    genSection.innerHTML = generatedNames.replace(/\n/g, '<br>');
+    const namesArray = generatedNames.split('\n');
+    
+    genSection.innerHTML = namesArray.map(name => 
+        `<div class="name-overlay">
+            <span class="name-text">${name}</span>
+            <div class="copy-overlay">Copy</div>
+        </div>`
+    ).join('');
 }
+
 
 // Function to handle regenerate button click
 function regenerateNames() {

@@ -27,8 +27,7 @@
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="tools.html">Tools</a></li>
+                <li><a href="index.html">Tools</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -36,8 +35,7 @@
         <!-- Mobile Navigation -->
         <nav class="mobile-nav">
             <ul>
-                <li><a href="index.html">Homepage</a></li>
-                <li><a href="tools.html">Our Tools</a></li>
+                <li><a href="index.html" class="active">Our Tools</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
@@ -65,6 +63,58 @@
                 </div>
             </div>
         </section>
+        <style>
+.number-overlay {
+    position: relative;
+    display: inline-block;
+    width: 100px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    line-height: 50px; /* Vertically center the text */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+    color: #fff; /* Text color */
+    border-radius: 5px; /* Optional: rounded corners */
+    font-size: 2rem; /* Adjust the font size as needed */
+    text-align: center; /* Center the text horizontally */
+    margin: 5px 0; /* Space between numbers */
+    position: relative; /* Ensure the copy-overlay is positioned relative to this element */
+}
+
+/* Style for the copy overlay */
+.copy-overlay {
+    position: absolute; /* Position absolutely within the number-overlay */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center the text */
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background for the overlay */
+    color: #fff; /* White text */
+    padding: 5px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size for the "copy" text */
+    text-align: center; /* Center text horizontally */
+    height: 40%; /* 40% of the height of the number-overlay */
+    width: 40%; /* Adjust width for better visibility */
+    display: flex; /* Use flexbox to center text */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    box-sizing: border-box; /* Include padding in height calculation */
+    display: none; /* Hidden by default */
+}
+
+
+.number-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Overlay background */
+    z-index: -1; /* Ensure it's behind the text */
+    border-radius: 5px;
+}
+
+
+        </style>
         <section id="gen">
             <p>Hi, Hello!<br>
                 Hi, Hello!<br>
@@ -73,6 +123,56 @@
                 Hi, Hello!<br></p>
         </section>
     </main>
+        <style>
+.share-section {
+    display: flex;
+    flex-direction: column; /* Stack the text and icons vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Space between the text and icons */
+    margin-top: 10px; /* Space above the section */
+}
+body.dark-mode .share-text {
+    color: #fff; /* Adjust color as needed */
+}
+.share-text {
+    padding-bottom: -10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+    font-size: 18px; /* Adjust as needed */
+    color: #333; /* Adjust color as needed */
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+.share-icon {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Adjust the size as needed */
+    text-decoration: none;
+        padding-bottom: 15px;
+}
+
+.share-icon:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+ 
+</style>
+<div class="share-section">
+            <p class="share-text">Share this page:</p>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="share-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
         <section id="footerprint">
 <p><em>Last Update:</em> <span style="color: #3498db;">8/3/2024</span>.</p>
     <section id="footerprint">
@@ -94,7 +194,7 @@
     
     <script>
         function redirectToHome() {
-            window.location.href = "tools.html";
+            window.location.href = "index.html";
         }
     </script>
         <script>

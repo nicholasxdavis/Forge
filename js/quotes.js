@@ -32,19 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return { content: data.content, author: data.author };
     }
 
-    function displayQuote(quote, author) {
-        const quoteDiv = document.createElement('div');
-        quoteDiv.className = 'quote';
-        quoteDiv.innerHTML = `"${quote}"<br><em>- ${author}</em>`;
+function displayQuote(quote, author) {
+    const quoteDiv = document.createElement('div');
+    quoteDiv.className = 'quote';
+    quoteDiv.innerHTML = `"${quote}"<br><em>- ${author}</em>`;
 
-        // Add click event to copy quote
-        quoteDiv.addEventListener('click', () => {
-            copyToClipboard(`"${quote}" - ${author}`);
-            showPopup(); // Display simplified popup message
-        });
+    const overlayText = document.createElement('div');
+    overlayText.className = 'overlay-text';
+    overlayText.textContent = "Copy";
 
-        quoteContainer.appendChild(quoteDiv);
-    }
+    quoteDiv.appendChild(overlayText);
+
+    // Add click event to copy quote
+    quoteDiv.addEventListener('click', () => {
+        copyToClipboard(`"${quote}" - ${author}`);
+        showPopup(); // Display simplified popup message
+    });
+
+    quoteContainer.appendChild(quoteDiv);
+}
 
     function copyToClipboard(text) {
         const textarea = document.createElement('textarea');
