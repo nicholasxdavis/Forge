@@ -10,7 +10,98 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
     <link rel="stylesheet" href="css/temp.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
     <style>
+        .dropdown-card {
+            display: none;
+            position: absolute;
+            width: 90px;
+            margin-top: 4px;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+            border-radius: 4px;
+            text-align: center;
+            padding: 10px;
+            transform: translateX(-50%);
+        }
+        .dropdown-card .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dropdown-card label {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        /* Similar CSS for dark mode and other custom styles here */
+        #font-size-slider {
+            width: 80%;
+            border-radius: 4px;
+            -webkit-appearance: none;
+            background: #ddd;
+            height: 8px;
+            margin-top: 10px;
+        }
+        #font-size-slider::-webkit-slider-thumb,
+        #font-size-slider::-moz-range-thumb,
+        #font-size-slider::-ms-thumb {
+            display: none;
+            background: #3498db;
+            border-radius: 50%;
+            height: 16px;
+            width: 16px;
+            cursor: pointer;
+            margin-top: -4px;
+        }
+        #font-size-input {
+            background: #FFF;
+            margin-top: 10px;
+            width: 35%;
+            border-radius: 4px;
+        }
+                body.dark-mode #font-size-input {
+            border: 2px solid var(--primary-color);
+            background-color: #444;
+        }
+        body.dark-mode .dropdown-card {
+            background: #222;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        body.dark-mode .dropdown-card label {
+            font-weight: 500;
+            color: #fff;
+        }
+        body.dark-mode #font-size-slider {
+            background: #f0f5f9;
+        }
+        body.dark-mode #font-size-slider::-webkit-slider-thumb,
+        body.dark-mode #font-size-slider::-moz-range-thumb,
+        body.dark-mode #font-size-slider::-ms-thumb {
+            background: #3498db;
+        }
+        select, input[type="number"] {
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+        body.dark-mode select, body.dark-mode input[type="number"], body.dark-mode input[type="range"] {
+            background: #444;
+            color: #f5f5f5;
+            border: 1px solid #555;
+        }
+        .pickr .pcr-button { 
+            border: solid 1px #333;
+        }
+        body.dark-mode .pickr .pcr-button { 
+            border: solid 1px #fff;
+        }
     </style>
 </head>
 <body>
@@ -18,7 +109,6 @@
     <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
         <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
-        <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -27,7 +117,6 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <!-- Mobile Navigation -->
         <nav class="mobile-nav">
             <ul>
                 <li><a href="index.html">Homepage</a></li>
@@ -47,7 +136,6 @@
                 <button class="close-button" id="close-popup">Close</button>
             </div>
         </div>
-        <!-- Download Popup -->
         <div id="popup2" class="popup2">
             <div class="popup2-content">
                 <div class="popup-options">
@@ -64,7 +152,6 @@
                 <button class="close-button" id="cancel-popup2">Cancel</button>
             </div>
         </div>
-        <!-- Print Popup -->
         <div id="popup3" class="popup2">
             <div class="popup2-content">
                 <div class="popup-options">
@@ -73,9 +160,17 @@
                         <label for="print">Print Selected:</label>
                         <button class="option-button" id="print">Print As</button>
                     </div>
+                            <style> 
+.option-button:disabled {
+    background-color: #ddd; /* Light gray background */
+    color: #aaa; /* Light gray text */
+    cursor: not-allowed; /* Cursor indicates it's not clickable */
+    border: 1px solid #ccc; /* Light gray border */
+}
+        </style>
                     <div class="option">
                         <label for="print-all">Print All:</label>
-                        <button class="option-button" id="print-all">Print As</button>
+                        <button class="option-button" id="print-all" disabled>Print As</button>
                     </div>
                 </div>
                 <button class="close-button" id="cancel-popup3">Cancel</button>
@@ -100,7 +195,7 @@
                     <i class="fas fa-print"></i>
                     <span class="button-label">Print</span>
                 </button>
-                <button class="formatting-button" id="font-family" title="Font Family">
+                <button class="formatting-button" id="font-family-button" title="Font Family">
                     <i class="fas fa-font"></i>
                     <span class="button-label">Font Family</span>
                 </button>
@@ -127,25 +222,89 @@
             </div>
         </section>
 
+        <!-- Dropdown containers -->
+        <div class="dropdown-card" id="font-family-dropdown">
+            <div class="dropdown-content">
+                <label for="font-family-select">Font Family:</label>
+                <select id="font-family-select">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <!-- More font families... -->
+                </select>
+            </div>
+        </div>
+
+        <div class="dropdown-card" id="font-size-dropdown">
+            <div class="dropdown-content">
+                <label for="font-size-slider">Font Size:</label>
+                <input type="range" id="font-size-slider" min="8" max="72" value="16">
+                <div class="font-size-input-container">
+                    <label for="font-size-input">Pixels:</label>
+                    <input type="number" id="font-size-input" min="8" max="72" value="16">
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown-card" id="font-style-dropdown">
+            <div class="dropdown-content">
+                <label for="font-style-select">Font Style:</label>
+                <select id="font-style-select">
+                    <option value="normal">Normal</option>
+                    <option value="italic">Italic</option>
+                    <option value="bold">Bold</option>
+                    <!-- More font styles... -->
+                </select>
+            </div>
+        </div>
+
+<div class="dropdown-card" id="text-color-dropdown">
+    <div class="dropdown-content">
+        <label for="text-color-input">Text Color:</label>
+        <div id="text-color-picker" class="color-picker"></div>
+    </div>
+</div>
+
+<div class="dropdown-card" id="background-color-dropdown">
+    <div class="dropdown-content">
+        <label for="background-color-input">Background Color:</label>
+        <div id="background-color-picker" class="color-picker"></div>
+    </div>
+</div>
+
+        <div class="dropdown-card" id="text-align-dropdown">
+            <div class="dropdown-content">
+                <label for="text-align-select">Text Alignment:</label>
+                <select id="text-align-select">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+        </div>
+
         <div class="container">
             <aside id="note-panel">
-                <h3>Saved Notes</h3>
-                <img id="note-panel-icon" src="img/up.svg" alt="Note Panel Icon" onclick="toggleIcon()">
-                <ul id="note-list">
-                    <li data-id="1">
-                        <span class="note-name">Layer 1</span>
-                        <input type="text" class="note-name-input">
-                        <button class="edit-icon" data-index="1" title="Edit">
-                            <img src="img/edit.svg" alt="Edit Icon">
-                        </button>
-                        <button class="delete-icon" data-index="1" title="Delete">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </li>
-                    <!-- Additional layers... -->
-                </ul>
-                <button id="add-note-button">+</button> <!-- Add Note Button -->
-            </aside>
+    <h3>Saved Notes</h3>
+    <img id="note-panel-icon" src="img/up.svg" alt="Note Panel Icon" onclick="toggleNoteList()">
+    <div id="note-list-wrapper">
+        <ul id="note-list">
+            <li data-id="1">
+                <span class="note-name">Layer 1</span>
+                <input type="text" class="note-name-input">
+                <button class="edit-icon" data-index="1" title="Edit">
+                    <img src="img/edit.svg" alt="Edit Icon">
+                </button>
+                <button class="delete-icon" data-index="1" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </li>
+            <!-- Additional layers... -->
+        </ul>
+    </div>
+    <button id="add-note-button">+</button> <!-- Add Note Button -->
+</aside>
+
             <section id="editor">
                 <textarea id="notepad" placeholder="Type your text here..."></textarea>
                 <div id="counter">Words: 0 | Characters: 0</div>
@@ -153,82 +312,167 @@
             </section>
         </div>
     </main>
+    <div id="cookie-popup" class="cookie-popup">
+        <p>This website relies on cookies to ensure you get the best experience. <br><a href="privacypolicy.html">Learn more</a></p>
+        <button id="cookie-popup-btn">Ok!</button>
+    </div>
     <section id="footerprint">
-        <p><em>Last Update:</em> <span style="color: #3498db;">8/5/2024</span>.</p>
+        <p><em>Last Update:</em> <span style="color: #3498db;">8/8/2024</span>.</p>
     </section>
     <section id="footerprint">
         <p>Thanks for choosing Blacnova's Forge!</p>
     </section>
-        <div id="cookie-popup" class="cookie-popup">
-    <p>This website relies on cookies to ensure you get the best experience. <br><a href="privacypolicy.html">Learn more</a></p>
-    <button id="cookie-popup-btn">Ok!</button>
-    </div>
     <footer>
         <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
-        <p>
-            <a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a>
-        </p>
+        <p><a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a></p>
     </footer>
-    <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/popups.js"></script>
     <script src="js/note.js"></script>
     <script src="js/format.js"></script>
-    <script>
-        function redirectToHome() {
-            window.location.href = "tools.html";
-        }
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/i18n/default.min.js"></script>
+<script>
+    function redirectToHome() {
+        window.location.href = "tools.html";
+    }
 
-        document.getElementById('info-icon').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'flex';
-        });
+    document.getElementById('info-icon').addEventListener('click', function() {
+        document.getElementById('popup').style.display = 'flex';
+    });
 
-        document.getElementById('close-popup').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'none';
-        });
+    document.getElementById('close-popup').addEventListener('click', function() {
+        document.getElementById('popup').style.display = 'none';
+    });
 
-        // Ensure popups are handled in the script
-        document.getElementById('download-button').addEventListener('click', () => {
-            document.getElementById('popup2').style.display = 'flex';
-        });
+    document.getElementById('download-button').addEventListener('click', () => {
+        document.getElementById('popup2').style.display = 'flex';
+    });
 
-        document.getElementById('print-button').addEventListener('click', () => {
-            document.getElementById('popup3').style.display = 'flex';
-        });
+    document.getElementById('print-button').addEventListener('click', () => {
+        document.getElementById('popup3').style.display = 'flex';
+    });
 
-        document.getElementById('cancel-popup2').addEventListener('click', () => {
-            document.getElementById('popup2').style.display = 'none';
-        });
+    document.getElementById('cancel-popup2').addEventListener('click', () => {
+        document.getElementById('popup2').style.display = 'none';
+    });
 
-        document.getElementById('cancel-popup3').addEventListener('click', () => {
-            document.getElementById('popup3').style.display = 'none';
-        });
-    </script>
-        <script>
-       function toggleMobileMenu() {
-            const mobileNav = document.querySelector('nav.mobile-nav');
-            const menuList = mobileNav.querySelector('ul');
-            const overlay = document.getElementById('overlay');
+    document.getElementById('cancel-popup3').addEventListener('click', () => {
+        document.getElementById('popup3').style.display = 'none';
+    });
 
-            if (mobileNav.classList.contains('menu-open')) {
-                mobileNav.classList.remove('menu-open');
-                menuList.classList.remove('menu-open');
-                overlay.style.display = 'none';
-            } else {
-                mobileNav.classList.add('menu-open');
-                menuList.classList.add('menu-open');
-                overlay.style.display = 'block';
-            }
-        }
+    function toggleMobileMenu() {
+        const mobileNav = document.querySelector('nav.mobile-nav');
+        const menuList = mobileNav.querySelector('ul');
+        const overlay = document.getElementById('overlay');
 
-        // Hide the menu and overlay when clicking on the overlay
-        document.getElementById('overlay').addEventListener('click', function() {
-            const mobileNav = document.querySelector('nav.mobile-nav');
-            const menuList = mobileNav.querySelector('ul');
+        if (mobileNav.classList.contains('menu-open')) {
             mobileNav.classList.remove('menu-open');
             menuList.classList.remove('menu-open');
-            this.style.display = 'none';
+            overlay.style.display = 'none';
+        } else {
+            mobileNav.classList.add('menu-open');
+            menuList.classList.add('menu-open');
+            overlay.style.display = 'block';
+        }
+    }
+
+    document.getElementById('overlay').addEventListener('click', function() {
+        const mobileNav = document.querySelector('nav.mobile-nav');
+        const menuList = mobileNav.querySelector('ul');
+        mobileNav.classList.remove('menu-open');
+        menuList.classList.remove('menu-open');
+        this.style.display = 'none';
+    });
+
+    // Dropdown toggle logic
+    function toggleDropdown(buttonId, dropdownId) {
+        document.getElementById(buttonId).addEventListener('click', function(event) {
+            const dropdown = document.getElementById(dropdownId);
+            const buttonRect = event.target.getBoundingClientRect();
+            dropdown.style.left = `${buttonRect.left + (buttonRect.width / 2)}px`;
+            dropdown.style.top = `${buttonRect.bottom}px`;
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         });
 
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById(dropdownId);
+            const button = document.getElementById(buttonId);
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    }
+
+    toggleDropdown('font-family-button', 'font-family-dropdown');
+    toggleDropdown('font-size', 'font-size-dropdown');
+    toggleDropdown('font-style', 'font-style-dropdown');
+    toggleDropdown('text-color', 'text-color-dropdown');
+    toggleDropdown('background-color', 'background-color-dropdown');
+    toggleDropdown('text-align', 'text-align-dropdown');
+
+    // Function to toggle the visibility of the note list
+    function toggleNoteList() {
+        const noteListWrapper = document.getElementById('note-list-wrapper');
+        const icon = document.getElementById('note-panel-icon');
+
+        if (noteListWrapper.style.display === 'none' || noteListWrapper.style.display === '') {
+            noteListWrapper.style.display = 'block';
+            icon.src = 'img/up.svg'; // Show the notes list, set icon to up
+        } else {
+            noteListWrapper.style.display = 'none';
+            icon.src = 'img/down.svg'; // Hide the notes list, set icon to down
+        }
+    }
+
+    // Initialize the icon and note list state
+    toggleNoteList(); // Make sure the initial state is consistent
+</script>
+
+
+    <script>
+        function createColorPicker(elementId, defaultColor) {
+            return Pickr.create({
+                el: `#${elementId}`,
+                theme: 'classic',
+                default: defaultColor,
+                swatches: [
+                    'rgba(244, 67, 54, 1)',
+                    'rgba(233, 30, 99, 0.95)',
+                    'rgba(156, 39, 176, 0.9)',
+                    'rgba(103, 58, 183, 0.85)',
+                    'rgba(63, 81, 181, 0.8)',
+                    'rgba(33, 150, 243, 0.75)',
+                    'rgba(3, 169, 244, 0.7)',
+                    'rgba(0, 188, 212, 0.7)',
+                    'rgba(0, 150, 136, 0.75)',
+                    'rgba(76, 175, 80, 0.8)',
+                    'rgba(139, 195, 74, 0.85)',
+                    'rgba(205, 220, 57, 0.9)',
+                    'rgba(255, 235, 59, 0.95)',
+                    'rgba(255, 193, 7, 1)'
+                ],
+                components: {
+                    preview: true,
+                    opacity: true,
+                    hue: true,
+
+                    interaction: {
+                        hex: true,
+                        rgba: true,
+                        hsla: true,
+                        hsva: true,
+                        cmyk: true,
+                        input: true,
+                        clear: true,
+                        save: true
+                    }
+                }
+            });
+        }
+
+        const textColorPicker = createColorPicker('text-color-picker', '#000000');
+        const backgroundColorPicker = createColorPicker('background-color-picker', '#ffffff');
     </script>
 </body>
 </html>
