@@ -304,11 +304,79 @@
     </div>
     <button id="add-note-button">+</button> <!-- Add Note Button -->
 </aside>
+    <style> 
+        #download2-button {
+        display: none;
+    }
+@media only screen and (max-width: 600px) {
+    #download2-button {
+        display: block;
+        margin-top: -36px;
+        align-self: flex-end;
+        padding: 8px 16px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--button-background-light);
+        color: var(--button-text-light);
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
+    body.dark-mode #download2-button {
+        background-color: var(--button-background-dark);
+        color: var(--primary-color);
+    }
+
+    #download2-button:hover {
+        color: #2980b9;
+    }
+
+    #save-button {
+        margin-left: 40px;
+        padding: 8px 16px;
+        font-size: 13px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--button-background-light);
+        color: var(--button-text-light);
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    body.dark-mode #save-button {
+        background-color: var(--button-background-dark);
+        color: var(--primary-color);
+    }
+
+    #save-button:hover {
+        color: #2980b9;
+    }
+}
+     #notepad::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+ #notepad::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Scrollbar color */
+    border-radius: 20px; /* Rounded corners */
+    border: 3px solid #fff; /* Space between the scrollbar and the edge */
+  }
+
+  body.dark-mode #notepad::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Scrollbar color */
+    border-radius: 20px; /* Rounded corners */
+    border: 3px solid #333; /* Space between the scrollbar and the edge */
+  }
+
+  #notepad::-webkit-scrollbar-track {
+    border-radius: 20px;
+  }
+    </style>
             <section id="editor">
                 <textarea id="notepad" placeholder="Type your text here..."></textarea>
                 <div id="counter">Words: 0 | Characters: 0</div>
                 <button id="save-button">Save</button>
+                <button id="download2-button">Download</button>
             </section>
         </div>
     </main>
@@ -387,6 +455,8 @@ body.dark-mode .share-text {
         window.location.href = "index.html";
     }
 
+
+
     document.getElementById('info-icon').addEventListener('click', function() {
         document.getElementById('popup').style.display = 'flex';
     });
@@ -394,6 +464,12 @@ body.dark-mode .share-text {
     document.getElementById('close-popup').addEventListener('click', function() {
         document.getElementById('popup').style.display = 'none';
     });
+
+
+    document.getElementById('download2-button').addEventListener('click', () => {
+        document.getElementById('popup2').style.display = 'flex';
+    });
+
 
     document.getElementById('download-button').addEventListener('click', () => {
         document.getElementById('popup2').style.display = 'flex';

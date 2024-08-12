@@ -1,0 +1,241 @@
+/* Media query for smaller screens */
+@media (max-width: 1000px) {
+    #todo-input, #todo-time, #add-todo,
+    .todo-input, .todo-time, .add-todo {
+        width: 100%; /* Full width for smaller screens */
+        box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+
+    #save-title, .save-title {
+        width: 78px;
+    }
+
+    #list-title-input, .list-title-input {
+        max-width: 100%; /* Ensure it fits the container */
+        width: calc(100% - 88px); /* Subtract save button width and margin */
+    }
+}
+
+.todo-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--card-background-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.rename-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+}
+
+#save-title, .save-title {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 100%;
+    width: 80px;
+}
+
+#list-title-input, .list-title-input {
+    color: #444;
+    width: calc(100% - 88px); /* Ensure the input fits the container */
+    font-size: 24px;
+    margin-right: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px; /* Ensure the input field height is specified */
+}
+
+#save-title:hover, .save-title:hover {
+    background-color: #2980b9;
+}
+
+.todo-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#todo-input, .todo-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#todo-time, .todo-time {
+    width: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#add-todo, .add-todo {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    width: 80px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#add-todo:hover, .add-todo:hover {
+    background-color: #2980b9;
+}
+
+.todo-panel {
+    max-height: 400px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+#todo-list, .todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    max-height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8d7da; /* Red background for unchecked items */
+    color: #721c24; /* Darker text color for visibility */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-item.checked {
+    background-color: #d4edda; /* Light green background for checked items */
+    color: #155724; /* Darker text color for visibility */
+}
+
+.todo-item .icons-container {
+    display: flex; /* Use flexbox to align icons next to each other */
+    gap: 10px; /* Space between icons */
+}
+
+.todo-item .check-icon,
+.todo-item .trash-icon {
+    color: #28a745; /* Green check icon color */
+    cursor: pointer;
+}
+
+.todo-item .check-icon:hover {
+    color: #218838;
+}
+
+.todo-item .trash-icon {
+    color: #dc3545; /* Red trash icon color */
+}
+
+.todo-item .trash-icon:hover {
+    color: #c82333;
+}
+
+.todo-item .todo-time {
+    margin-left: 10px;
+}
+
+.list-container {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#info-icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-top: -2px;
+    cursor: pointer;
+}
+
+body.dark-mode #info-icon {
+    filter: invert(1);
+}
+
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Could be more or less, depending on screen size */
+    height: 150px;
+    border-radius: 15px; /* Rounded corners */
+    display: flex; /* Added to use flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+
+body.dark-mode .popup {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Darker background for content */
+    color: #f1f1f1; /* Light text color for dark mode */
+}
+
+.close-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Add some space above the button */
+}
+
+body.dark-mode .close-button {
+    background-color: #444;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}

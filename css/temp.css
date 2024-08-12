@@ -16,7 +16,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--card-background-light);
+    scrollbar-color: var(--primary-color) transparent;
 }
 
         body.dark-mode #note-panel {
@@ -25,11 +25,10 @@
         }
 
         #note-panel::-webkit-scrollbar-track {
-            background: var(--card-background-light);
+            background: none;
         }
 
         #note-panel::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
             border-radius: 10px;
         }
 
@@ -45,6 +44,8 @@
         }
 
         #notepad {
+            min-height: 400px;
+            max-width: 100%;
             width: 100%;
             padding: 10px;
             height: 400px;
@@ -193,7 +194,7 @@
             }
 
             #notepad {
-                height: 500px;
+                height: 550px;
             }
 
             #save-button {

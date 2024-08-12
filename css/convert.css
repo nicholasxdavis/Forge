@@ -1,5 +1,6 @@
         body {
             color: black; /* All text is black */
+            overflow-x: hidden;
             margin: 0; /* Remove default margin */
             padding: 0; /* Remove default padding */
         }

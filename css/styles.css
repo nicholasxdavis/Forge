@@ -361,7 +361,7 @@ footer p {
     border-radius: 8px;
     box-shadow: 0 4px 8px var(--card-shadow-light);
     padding: 1.5rem;
-    max-width: 400px;
+    max-width: 300px;
     text-align: center;
 }
 
