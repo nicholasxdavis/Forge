@@ -560,19 +560,33 @@ body.dark-mode .share-text {
         }
     }
 
+    // Function to check if the view is mobile
+    function isMobileView() {
+        return window.innerWidth <= 768; // Adjust the width threshold for mobile view
+    }
+
     // Call the function for date and time inputs
     document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            // Set current date and time
-            setInputValues('deadline-date', 'deadline-time');
-            
+        if (isMobileView()) {
             setTimeout(() => {
-                autoFocusAndBlur('deadline-date');
+                // Set current date and time
+                setInputValues('deadline-date', 'deadline-time');
+                
                 setTimeout(() => {
-                    autoFocusAndBlur('deadline-time');
-                }, 200); // Slight delay before focusing on the time input
-            }, 200); // Delay before focusing on the date input
-        }, 200); // Delay before setting the date and time inputs
+                    autoFocusAndBlur('deadline-date');
+                    setTimeout(() => {
+                        autoFocusAndBlur('deadline-time');
+                    }, 0); // Slight delay before focusing on the time input
+                }, 0); // Delay before focusing on the date input
+            }, 0); // Delay before setting the date and time inputs
+        }
+    });
+
+    // Optional: Recheck and adjust on window resize
+    window.addEventListener('resize', () => {
+        if (isMobileView()) {
+            setInputValues('deadline-date', 'deadline-time');
+        }
     });
 </script>
 

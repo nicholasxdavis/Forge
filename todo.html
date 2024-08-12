@@ -9,250 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/gen.css">
-   
-    <style>
-@media (max-width: 1000px) {
- #todo-input, #todo-time, #add-todo {
-        width: 100%; /* Full width for smaller screens */
-        box-sizing: border-box; /* Ensure padding and border are included in width */
-    }
+    <link rel="stylesheet" href="css/temptodo.css">
+    <style> 
+        .template {
+    display: none;
 }
-
-
-        .todo-container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: var(--card-background-light);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .todo-container h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: var(--text-light);
-        }
-        .rename-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            width: 600px;
-            height: 40px;
-        }
-        #save-title {
-    background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            height: 100%;
-            width: 80px;
-        }
-#list-title-input {
-    color: #444;
-    max-width: 500px;
-    font-size: 24px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    flex: 1;
-    height: 30px; /* Ensure the input field height is specified */
-}
-@media (max-width: 1000px) {
-#save-title {
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 78px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-        }
-        #list-title-input {
-    max-width: 260px;
-    font-size: 24px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    flex: 1;
-    height: 30px; /* Ensure the input field height is specified */
-}
-}
-        #save-title:hover {
-            background-color: #2980b9;
-        }
-        .todo-input-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        #todo-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #todo-time {
-            width: 120px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #add-todo {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            width: 80px;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #add-todo:hover {
-            background-color: #2980b9;
-        }
-        .todo-panel {
-            max-height: 400px;
-            overflow-y: auto;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-        }
-        #todo-list {
-            list-style: none;
-            padding: 0;
-        }
-        .todo-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            background-color: #f8d7da; /* Red background for unchecked items */
-            color: #721c24; /* Darker text color for visibility */
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        .todo-item:last-child {
-            border-bottom: none;
-        }
-        
-        .todo-item.checked {
-            background-color: #d4edda; /* Light green background for checked items */
-            color: #155724; /* Darker text color for visibility */
-        }
-        
-        .todo-item .icons-container {
-            display: flex; /* Use flexbox to align icons next to each other */
-            gap: 10px; /* Space between icons */
-        }
-        
-        .todo-item .check-icon,
-        .todo-item .trash-icon {
-            color: #28a745; /* Green check icon color */
-            cursor: pointer;
-        }
-        
-        .todo-item .check-icon {
-
-        }
-        
-        .todo-item .check-icon:hover {
-            color: #218838;
-        }
-        
-        .todo-item .trash-icon {
-            color: #dc3545; /* Red trash icon color */
-        }
-        
-        .todo-item .trash-icon:hover {
-            color: #c82333;
-        }
-        
-        .todo-item .todo-time {
-            margin-left: 10px;
-        }
-        .list-container {
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-               #info-icon {
-            width: 15px;
-            height: 15px;
-            vertical-align: middle;
-            margin-left: 5px;
-            margin-top: -2px;
-            cursor: pointer;
-        }
-
-        body.dark-mode #info-icon {
-            filter: invert(1);
-        }
-
-        .popup {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top of other content */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-            align-items: center; /* Center content vertically */
-            justify-content: center; /* Center content horizontally */
-        }
-
-        .popup-content {
-            background-color: #fefefe;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px; /* Could be more or less, depending on screen size */
-            height: 150px;
-            border-radius: 15px; /* Rounded corners */
-            display: flex; /* Added to use flexbox */
-            flex-direction: column; /* Arrange children in a column */
-            align-items: center; /* Center content horizontally */
-            justify-content: center; /* Center content vertically */
-        }
-
-        body.dark-mode .popup {
-            background-color: rgba(0, 0, 0, 0.8); /* Darker background for dark mode */
-        }
-
-        body.dark-mode .popup-content {
-            background-color: #333; /* Darker background for content */
-            color: #f1f1f1; /* Light text color for dark mode */
-        }
-
-        .close-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px; /* Add some space above the button */
-        }
-
-        body.dark-mode .close-button {
-            background-color: #444;
-        }
-
-        .close-button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
@@ -289,30 +50,52 @@
             </div>
         </div>
         <section id="introduction">
-            <div class="intro-container">
-                <h2>To-Do Lists</h2>
-                <p>Create and manage multiple to-do lists.<br>
-                Locally Stored: <img id="info-icon" src="img/info.svg" alt="Info Icon" title="Information"></p>
-                <div class="button-container">
-        <button id="newlist-btn">New List</button>
-    </div>
-            </div>
-        </section>
-        <div class="todo-container">
-            <h1 id="list-title">To-Do List</h1>
-            <div class="rename-container">
-                <input type="text" id="list-title-input" value="To-Do List">
-                <button id="save-title">Save</button>
-            </div>
-            <div class="todo-input-container">
-                <input type="text" id="todo-input" placeholder="Enter a new task...">
-                <input type="time" id="todo-time">
-                <button id="add-todo"><i class="fas fa-plus"></i> Add</button>
-            </div>
-            <div class="todo-panel">
-                <ul id="todo-list"></ul>
+        <div class="intro-container">
+            <h2>To-Do Lists</h2>
+            <p>Create and manage multiple to-do lists.<br>
+            Locally Stored: <img id="info-icon" src="img/info.svg" alt="Info Icon" title="Information"></p>
+            <div class="button-container">
+                <button id="newlist-btn">New List</button>
             </div>
         </div>
+    </section>
+    <style> 
+        .todo-container {
+    position: relative; /* Ensure the container is positioned relative to place the icon */
+}
+        .close-todo-container {
+    position: absolute; /* Position the icon absolutely within the container */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    font-size: 20px; /* Adjust the size as needed */
+    color: #333; /* Adjust the color as needed */
+    cursor: pointer; /* Show a pointer cursor on hover */
+}
+
+.close-todo-container:hover {
+    color: #666; /* Change color on hover for better UX */
+}
+    </style>
+        <div id="todo-lists-container">
+        <!-- Existing to-do list structure -->
+        <div class="todo-container template" id="todo-list-template">
+    <i class="fas fa-times close-todo-container"></i> <!-- Add this line -->
+    <h1 id="list-title">To-Do List</h1>
+    <div class="rename-container">
+        <input type="text" class="list-title-input" value="To-Do List">
+        <button class="save-title">Save</button>
+    </div>
+    <div class="todo-input-container">
+        <input type="text" class="todo-input" placeholder="Enter a new task...">
+        <input type="time" class="todo-time">
+        <button class="add-todo"><i class="fas fa-plus"></i> Add</button>
+    </div>
+    <div class="todo-panel">
+        <ul class="todo-list"></ul>
+    </div>
+</div>
+
+    </div>
     </main>
         <style>
 .share-section {
@@ -382,123 +165,7 @@ body.dark-mode .share-text {
     </footer>
     <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
-    <script>
-        function redirectToHome() {
-            window.location.href = "index.html";
-        }
-
-        document.getElementById('info-icon').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'flex';
-        });
-
-        document.getElementById('close-popup').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'none';
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const todoInput = document.getElementById('todo-input');
-            const todoTime = document.getElementById('todo-time');
-            const addTodoButton = document.getElementById('add-todo');
-            const todoList = document.getElementById('todo-list');
-            const listTitleInput = document.getElementById('list-title-input');
-            const saveTitleButton = document.getElementById('save-title');
-            const listTitle = document.getElementById('list-title');
-
-            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            let listTitleText = localStorage.getItem('listTitle') || 'To-Do List';
-
-            listTitleInput.value = listTitleText;
-            listTitle.textContent = listTitleText;
-
-            addTodoButton.addEventListener('click', addTodo);
-            todoInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') addTodo();
-            });
-
-            saveTitleButton.addEventListener('click', () => {
-                listTitleText = listTitleInput.value.trim();
-                if (listTitleText) {
-                    localStorage.setItem('listTitle', listTitleText);
-                    updateTitle();
-                }
-            });
-
-            function addTodo() {
-                const taskText = todoInput.value.trim();
-                const taskTime = todoTime.value;
-
-                if (taskText === '') return;
-
-                const formattedTime = formatTime(taskTime);
-
-                const task = {
-                    text: taskText,
-                    time: taskTime,
-                    formattedTime: formattedTime,
-                    checked: false
-                };
-
-                tasks.push(task);
-                saveTasks();
-                updateTodoList();
-                todoInput.value = '';
-                todoTime.value = '';
-            }
-
-            function updateTodoList() {
-                todoList.innerHTML = '';
-
-                tasks.sort((a, b) => a.time.localeCompare(b.time));
-
-                tasks.forEach(task => {
-                    const todoItem = document.createElement('li');
-                    todoItem.classList.add('todo-item');
-                    if (task.checked) {
-                        todoItem.classList.add('checked');
-                    }
-                    todoItem.innerHTML = `
-            <span>${task.text}</span>
-            ${task.time ? `<span class="todo-time">${task.formattedTime}</span>` : ''}
-            <div class="icons-container">
-                <i class="fas fa-check check-icon"></i>
-                <i class="fas fa-trash-alt trash-icon"></i>
-            </div>
-        `;
-
-                    todoItem.querySelector('.check-icon').addEventListener('click', () => {
-                        todoItem.classList.toggle('checked');
-                        task.checked = !task.checked;
-                        saveTasks();
-                    });
-
-                    todoItem.querySelector('.trash-icon').addEventListener('click', () => {
-                        tasks = tasks.filter(t => t !== task);
-                        saveTasks();
-                        updateTodoList();
-                    });
-
-                    todoList.appendChild(todoItem);
-                });
-            }
-
-            function saveTasks() {
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-            }
-
-            function formatTime(time) {
-                if (!time) return '';
-                const [hours, minutes] = time.split(':');
-                return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
-            }
-
-            function updateTitle() {
-                listTitle.textContent = listTitleText;
-            }
-
-            updateTodoList();
-            updateTitle();
-        });
-    </script>
+    <script src="js/temptodo.js"></script>
         <script>
        function toggleMobileMenu() {
             const mobileNav = document.querySelector('nav.mobile-nav');
@@ -527,23 +194,24 @@ body.dark-mode .share-text {
 
     </script>
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const timeInput = document.getElementById('todo-time');
+        document.addEventListener('DOMContentLoaded', () => {
+    const timeInputs = document.querySelectorAll('.todo-time');
 
     // Function to check if the user is on a mobile device
     function isMobile() {
         return window.matchMedia("(max-width: 768px)").matches;
     }
 
-    if (timeInput && isMobile()) {
-        // Set the time input to the current time
+    if (timeInputs.length > 0 && isMobile()) {
+        // Set the time input to the current time for each input
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
-        timeInput.value = `${hours}:${minutes}`;
+        timeInputs.forEach(timeInput => {
+            timeInput.value = `${hours}:${minutes}`;
+        });
     }
 });
-
     </script>
 </body>
 </html>

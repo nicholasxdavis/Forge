@@ -2,21 +2,44 @@
 const form = document.getElementById('converter-form');
 const fileInput = document.getElementById('file-upload');
 const progressBar = document.getElementById('upload-progress');
-const dropArea = document.getElementById('drop-area'); // New: Select the drop area
+const dropArea = document.getElementById('drop-area'); // Select the drop area
+const conversionTypeSelect = document.getElementById('conversion-type'); // Select the conversion type
+const popup = document.getElementById('popup'); // Select the popup element
+const closePopupButton = document.getElementById('close-popup'); // Select the close button in the popup
 
-// Function to convert video file to blob (MP4 to MOV conversion example)
-async function convertVideoFile(file) {
+// Function to convert video file to the desired format based on the selected conversion type
+async function convertVideoFile(file, conversionType) {
     return new Promise((resolve, reject) => {
         // Simulate conversion (replace with actual conversion logic)
         setTimeout(() => {
-            const convertedBlob = new Blob([file], { type: 'video/mov' });
+            let mimeType;
+            switch (conversionType) {
+                case 'mp4':
+                    mimeType = 'video/mp4';
+                    break;
+                case 'avi':
+                    mimeType = 'video/x-msvideo';
+                    break;
+                case 'mov':
+                    mimeType = 'video/quicktime';
+                    break;
+                case 'mkv':
+                    mimeType = 'video/x-matroska';
+                    break;
+                case 'webm':
+                    mimeType = 'video/webm';
+                    break;
+                default:
+                    mimeType = file.type; // Default to the original file type if unrecognized
+            }
+            const convertedBlob = new Blob([file], { type: mimeType });
             resolve(convertedBlob);
         }, 2000); // Simulate conversion delay of 2 seconds
     });
 }
 
 // Function to handle batch conversion and zip creation
-async function handleBatchConversion(files) {
+async function handleBatchConversion(files, conversionType) {
     const convertedBlobs = [];
     const totalFiles = files.length;
     let filesProcessed = 0;
@@ -37,7 +60,6 @@ async function handleBatchConversion(files) {
             progressBar.value = percent;
         } else {
             console.error('Invalid progress value:', percent);
-            // Optionally handle or log the error
         }
     }
 
@@ -45,8 +67,11 @@ async function handleBatchConversion(files) {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         try {
-            const convertedBlob = await convertVideoFile(file);
-            convertedBlobs.push(convertedBlob);
+            const convertedBlob = await convertVideoFile(file, conversionType);
+            convertedBlobs.push({
+                blob: convertedBlob,
+                name: file.name.replace(/\.[^/.]+$/, `.${conversionType}`) // Change extension to selected type
+            });
 
             // Update progress bar after each file is processed
             filesProcessed++;
@@ -60,13 +85,13 @@ async function handleBatchConversion(files) {
     // If multiple files, create a zip file with converted blobs
     if (convertedBlobs.length > 1) {
         const zip = new JSZip();
-        convertedBlobs.forEach((blob, index) => {
-            zip.file(`converted_video_${index + 1}.mov`, blob);
+        convertedBlobs.forEach((fileData, index) => {
+            zip.file(fileData.name, fileData.blob);
         });
         return zip.generateAsync({ type: 'blob' }, updateProgressBar);
     } else {
         // If only one file, return the single blob directly
-        return convertedBlobs[0];
+        return convertedBlobs[0].blob;
     }
 }
 
@@ -87,13 +112,20 @@ form.addEventListener('submit', async function(event) {
 
     const files = fileInput.files;
     if (files.length === 0) {
-        alert('Please select one or more files.');
+        // Show popup if no files are selected
+        popup.style.display = 'flex';
+        return;
+    }
+
+    const conversionType = conversionTypeSelect.value;
+    if (!conversionType) {
+        alert('Please select a conversion type.');
         return;
     }
 
     try {
-        const blob = await handleBatchConversion(files);
-        const filename = files.length === 1 ? files[0].name.replace(/\.[^/.]+$/, ".mov") : `converted_videos.zip`;
+        const blob = await handleBatchConversion(files, conversionType);
+        const filename = files.length === 1 ? files[0].name.replace(/\.[^/.]+$/, `.${conversionType}`) : `converted_videos.zip`;
         triggerDownload(blob, filename);
     } catch (error) {
         console.error('Conversion failed:', error.message);
@@ -130,37 +162,29 @@ function handleDragOver(event) {
 function handleDragEnter(event) {
     event.preventDefault();
     event.stopPropagation();
-    // Add a class or other visual indicator to show the drop area is active
-    dropArea.classList.add('drag-over');
+    dropArea.classList.add('dragging');
 }
 
 // Function to handle drag leave event
 function handleDragLeave(event) {
     event.preventDefault();
     event.stopPropagation();
-    // Remove the class or visual indicator when dragging leaves the drop area
-    dropArea.classList.remove('drag-over');
+    dropArea.classList.remove('dragging');
 }
 
 // Function to handle drop event
 function handleDrop(event) {
     event.preventDefault();
     event.stopPropagation();
-    dropArea.classList.remove('drag-over'); // Remove drag-over class
+    dropArea.classList.remove('dragging');
 
     const files = event.dataTransfer.files;
-    fileInput.files = files; // Assign dropped files to the file input element
-
-    // Update file input change event listener to show clear button
     if (files.length > 0) {
-        document.getElementById('clear-button-container').classList.remove('hidden');
-    } else {
-        document.getElementById('clear-button-container').classList.add('hidden');
+        fileInput.files = files; // Update the file input with the dropped files
     }
 }
 
-// Attach drag and drop event listeners to drop area
-dropArea.addEventListener('dragover', handleDragOver);
-dropArea.addEventListener('dragenter', handleDragEnter);
-dropArea.addEventListener('dragleave', handleDragLeave);
-dropArea.addEventListener('drop', handleDrop);
+// Event listener to close the popup
+closePopupButton.addEventListener('click', function() {
+    popup.style.display = 'none';
+});

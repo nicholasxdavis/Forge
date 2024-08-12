@@ -20,6 +20,70 @@
     </style>
 </head>
 <body>
+        <style> 
+     .popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Could be more or less, depending on screen size */
+    height: 150px;
+    border-radius: 15px; /* Rounded corners */
+    display: flex; /* Added to use flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+
+body.dark-mode .popup {
+    background-color: rgba(0,0,0,0.8); /* Darker background for dark mode */
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Darker background for content */
+    color: #f1f1f1; /* Light text color for dark mode */
+}
+
+.close-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Add some space above the button */
+}
+
+body.dark-mode .close-button {
+    background-color: #444;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+    <div id="popup" class="popup">
+            <div class="popup-content">
+                <div id="message-sent">Your message has been sent successfully!</div>
+                <button class="close-button" id="close-popup">Close</button>
+            </div>
+        </div>
     <div id="overlay" class="overlay"></div>
     <header>
         <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">

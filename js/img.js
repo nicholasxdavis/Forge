@@ -4,7 +4,21 @@ const fileInput = document.getElementById('file-upload');
 const progressBar = document.getElementById('upload-progress');
 const progressContainer = document.querySelector('.progress-container');
 const dropArea = document.getElementById('drop-area');
-const conversionTypeSelect = document.getElementById('conversion-type'); // Select the conversion type
+const conversionTypeSelect = document.getElementById('conversion-type');
+const popup = document.getElementById('popup');
+const closePopupButton = document.getElementById('close-popup');
+const popupMessage = document.getElementById('message-sent');
+
+// Function to show custom popup
+function showPopup(message) {
+    popupMessage.textContent = message;
+    popup.style.display = 'flex';
+}
+
+// Function to hide custom popup
+function hidePopup() {
+    popup.style.display = 'none';
+}
 
 // Function to convert file to blob based on selected type
 async function convertFileToBlob(file, conversionType) {
@@ -50,7 +64,8 @@ async function handleBatchConversion(files, conversionType) {
     if (files.length === 1) {
         const file = files[0];
         const blob = await convertFileToBlob(file, conversionType);
-        return blob;
+        const newFileName = changeFileExtension(file.name, conversionType); // Change the file extension
+        return { blob, newFileName };
     } else {
         const zip = new JSZip();
         const totalFiles = files.length;
@@ -79,8 +94,9 @@ async function handleBatchConversion(files, conversionType) {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const blob = await convertFileToBlob(file, conversionType);
+            const newFileName = changeFileExtension(file.name, conversionType); // Change the file extension
 
-            zip.file(`${file.name}`, blob);
+            zip.file(newFileName, blob);
 
             filesProcessed++;
             updateProgressBar({ loaded: filesProcessed, total: totalFiles });
@@ -88,8 +104,22 @@ async function handleBatchConversion(files, conversionType) {
 
         const zipBlob = await zip.generateAsync({ type: 'blob' }, updateProgressBar);
 
-        return zipBlob;
+        return { blob: zipBlob, newFileName: 'converted_files.zip' };
     }
+}
+
+// Function to change the file extension
+function changeFileExtension(filename, conversionType) {
+    const extensionMap = {
+        png: '.png',
+        jpeg: '.jpeg',
+        gif: '.gif',
+        bmp: '.bmp',
+        tiff: '.tiff',
+        webp: '.webp',
+    };
+    const newExtension = extensionMap[conversionType] || '';
+    return filename.replace(/\.[^/.]+$/, newExtension);
 }
 
 // Function to trigger download
@@ -105,23 +135,22 @@ function triggerDownload(blob, filename) {
 
 // Event listener for form submission
 form.addEventListener('submit', async function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
     const files = fileInput.files;
     if (files.length === 0) {
-        alert('Please select one or more files.');
+        showPopup('Please select one or more files.'); // Show custom popup
         return;
     }
 
     const conversionType = conversionTypeSelect.value;
 
     try {
-        const blob = await handleBatchConversion(files, conversionType);
-        const filename = files.length === 1 ? files[0].name : `converted_files.zip`;
-        triggerDownload(blob, filename);
+        const { blob, newFileName } = await handleBatchConversion(files, conversionType);
+        triggerDownload(blob, newFileName);
     } catch (error) {
         console.error('Conversion failed:', error.message);
-        alert('Failed to convert/download the files. Please try again.');
+        showPopup('Failed to convert/download the files. Please try again.');
     } finally {
         progressBar.value = 0;
         progressContainer.style.display = 'none';
@@ -185,3 +214,6 @@ dropArea.addEventListener('dragover', handleDragOver);
 dropArea.addEventListener('dragenter', handleDragEnter);
 dropArea.addEventListener('dragleave', handleDragLeave);
 dropArea.addEventListener('drop', handleDrop);
+
+// Close popup event listener
+closePopupButton.addEventListener('click', hidePopup);

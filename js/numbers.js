@@ -6,7 +6,7 @@ function generateNumbers(count, digits) {
 
     for (let i = 0; i < count; i++) {
         const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        generatedNumbers += `<span class="number-overlay">${randomNumber}<div class="copy-overlay">Copy</div></span><br>`;
+        generatedNumbers += `<span class="number-overlay"><span class="number">${randomNumber}</span><div class="copy-overlay">Copy</div></span><br>`;
     }
 
     return generatedNumbers;
@@ -45,11 +45,13 @@ function saveNumbers() {
 
 // Function to copy text to clipboard
 function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-    });
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showPopup(); // Show the simplified popup message
 }
 
 // Attach event listeners to copy overlays
@@ -57,7 +59,7 @@ function attachCopyEventListeners() {
     const overlays = document.querySelectorAll('.copy-overlay');
     overlays.forEach(overlay => {
         overlay.addEventListener('click', () => {
-            const number = overlay.previousElementSibling.textContent;
+            const number = overlay.previousElementSibling.textContent.trim(); // Get only the number
             copyToClipboard(number);
         });
     });
@@ -84,6 +86,25 @@ function hideCopyOverlay(event) {
     overlay.style.display = 'none'; // Hide the overlay
 }
 
+// Function to show the popup
+function showPopup() {
+    const messageSent = document.getElementById('message-sent');
+    const popup = document.getElementById('popup');
+    
+    if (messageSent) {
+        messageSent.textContent = "Number copied!"; // Simplified message
+        messageSent.style.display = 'block'; // Ensure the element is visible
+    } else {
+        console.error('Element with id "message-sent" not found.');
+    }
+
+    if (popup) {
+        popup.style.display = 'flex'; // Show popup
+    } else {
+        console.error('Element with id "popup" not found.');
+    }
+}
+
 // Event listener for the regenerate button
 document.getElementById('regenerate-btn').addEventListener('click', regenerateNumbers);
 
@@ -94,4 +115,21 @@ document.getElementById('save-btn').addEventListener('click', saveNumbers);
 window.addEventListener('load', () => {
     displayNumbers();
     document.getElementById('gen').style.display = 'block';
+});
+
+// Adding the click event listener to the number overlay
+document.querySelectorAll('.number-overlay').forEach((numberOverlay) => {
+    numberOverlay.addEventListener('click', () => {
+        const number = numberOverlay.querySelector('.number').textContent.trim(); // Get only the number
+        copyToClipboard(number);
+    });
+});
+
+// Adding the click event listener to close the popup
+const closePopupButton = document.getElementById('close-popup');
+closePopupButton.addEventListener('click', () => {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'none'; // Hide popup
+    }
 });

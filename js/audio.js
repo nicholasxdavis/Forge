@@ -3,14 +3,37 @@ const form = document.getElementById('converter-form');
 const fileInput = document.getElementById('file-upload');
 const progressBar = document.getElementById('upload-progress');
 const dropArea = document.getElementById('drop-area');
+const conversionTypeSelect = document.getElementById('conversion-type'); // Select the conversion type
+const popup = document.getElementById('popup'); // Select the popup element
+const closePopupButton = document.getElementById('close-popup'); // Select the close button in the popup
 
-// Function to convert file to blob (generic)
-function convertFileToBlob(file) {
+// Function to convert file to blob based on the selected audio type
+async function convertFileToBlob(file, conversionType) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
         reader.onload = function(event) {
-            const blob = new Blob([event.target.result], { type: file.type });
+            let mimeType;
+            switch (conversionType) {
+                case 'mp3':
+                    mimeType = 'audio/mpeg';
+                    break;
+                case 'wav':
+                    mimeType = 'audio/wav';
+                    break;
+                case 'ogg':
+                    mimeType = 'audio/ogg';
+                    break;
+                case 'aac':
+                    mimeType = 'audio/aac';
+                    break;
+                case 'flac':
+                    mimeType = 'audio/flac';
+                    break;
+                default:
+                    mimeType = file.type; // Default to the original file type if unrecognized
+            }
+            const blob = new Blob([event.target.result], { type: mimeType });
             resolve(blob);
         };
 
@@ -22,17 +45,12 @@ function convertFileToBlob(file) {
     });
 }
 
-// Function to convert audio file to blob
-function convertAudioToBlob(file) {
-    return convertFileToBlob(file); // Reuse existing generic conversion function
-}
-
-// Function to handle batch conversion and zip creation (generic)
-async function handleBatchConversion(files) {
+// Function to handle batch conversion and zip creation
+async function handleBatchConversion(files, conversionType) {
     if (files.length === 1) {
         // If only one file, convert and download directly
         const file = files[0];
-        const blob = await convertFileToBlob(file);
+        const blob = await convertFileToBlob(file, conversionType);
         return blob;
     } else {
         // If multiple files, proceed with zip creation
@@ -40,7 +58,7 @@ async function handleBatchConversion(files) {
         const totalFiles = files.length;
         let filesProcessed = 0;
 
-        // Function to update progress bar (generic)
+        // Function to update progress bar
         function updateProgressBar(progress) {
             const loaded = progress.loaded || 0;
             const total = progress.total || 100; // Set a default total if not provided
@@ -56,17 +74,16 @@ async function handleBatchConversion(files) {
                 progressBar.value = percent;
             } else {
                 console.error('Invalid progress value:', percent);
-                // Optionally handle or log the error
             }
         }
 
         // Convert each file to blob and add to zip
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            const blob = await convertFileToBlob(file);
+            const blob = await convertFileToBlob(file, conversionType);
             
-            // Add file to zip
-            zip.file(`${file.name}`, blob);
+            // Add file to zip with the correct extension
+            zip.file(`${file.name.replace(/\.[^/.]+$/, `.${conversionType}`)}`, blob);
 
             // Update progress bar after each file is processed
             filesProcessed++;
@@ -80,10 +97,10 @@ async function handleBatchConversion(files) {
     }
 }
 
-// Function to handle audio conversion (specific to audio)
-async function handleAudioConversion(files) {
+// Function to handle audio conversion
+async function handleAudioConversion(files, conversionType) {
     const file = files[0]; // For simplicity, assume only one file for audio conversion
-    const blob = await convertAudioToBlob(file);
+    const blob = await convertFileToBlob(file, conversionType);
     return blob;
 }
 
@@ -104,19 +121,26 @@ form.addEventListener('submit', async function(event) {
 
     const files = fileInput.files;
     if (files.length === 0) {
-        alert('Please select one or more files.');
+        // Show popup if no files are selected
+        popup.style.display = 'flex';
+        return;
+    }
+
+    const conversionType = conversionTypeSelect.value;
+    if (!conversionType) {
+        alert('Please select a conversion type.');
         return;
     }
 
     try {
         let blob;
         if (files[0].type.startsWith('audio/')) {
-            blob = await handleAudioConversion(files);
+            blob = await handleAudioConversion(files, conversionType);
         } else {
-            blob = await handleBatchConversion(files);
+            blob = await handleBatchConversion(files, conversionType);
         }
 
-        const filename = files.length === 1 ? files[0].name : `converted_files.zip`;
+        const filename = files.length === 1 ? files[0].name.replace(/\.[^/.]+$/, `.${conversionType}`) : `converted_files.zip`;
         triggerDownload(blob, filename);
     } catch (error) {
         console.error('Conversion failed:', error.message);
@@ -141,7 +165,7 @@ document.getElementById('clear-files-btn').addEventListener('click', function() 
     document.getElementById('clear-button-container').classList.add('hidden'); // Hide clear button
 });
 
-// Drag and drop functionality (unchanged from original)
+// Drag and drop functionality
 function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -181,3 +205,8 @@ dropArea.addEventListener('dragover', handleDragOver);
 dropArea.addEventListener('dragenter', handleDragEnter);
 dropArea.addEventListener('dragleave', handleDragLeave);
 dropArea.addEventListener('drop', handleDrop);
+
+// Event listener to close the popup
+closePopupButton.addEventListener('click', function() {
+    popup.style.display = 'none';
+});
