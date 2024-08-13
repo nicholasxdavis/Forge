@@ -1,10 +1,11 @@
- document.getElementById('info-icon').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'flex';
-        });
+document.getElementById('info-icon').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'flex';
+});
 
-        document.getElementById('close-popup').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'none';
-        });
+document.getElementById('close-popup').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'none';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const todoListContainer = document.getElementById('todo-lists-container');
     const newListButton = document.getElementById('newlist-btn');
@@ -33,19 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createNewTodoList() {
-        const newList = createListClone({
+        const newListData = {
             id: `todo-list-${listCounter++}`,
             title: `To-Do List ${listCounter}`,
             tasks: []
-        });
-
-        todoListContainer.appendChild(newList);
-        allTodoLists.push({
-            id: newList.id,
-            title: `To-Do List ${listCounter}`,
-            tasks: []
-        });
+        };
+        allTodoLists.push(newListData);
         saveAllListsToLocalStorage();
+        const newList = createListClone(newListData);
+        todoListContainer.appendChild(newList);
     }
 
     function createListClone(listData) {
@@ -65,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
         titleInput.value = listData.title;
         listTitle.textContent = listData.title;
 
-        attachEventListeners(listData, titleInput, saveTitleButton, addTodoButton, todoInput, todoTime, todoList, listTitle, newList);
+        attachEventListeners(listData, titleInput, saveTitleButton, addTodoButton, todoInput, todoTime, todoList, listTitle, closeButton, newList);
 
         updateTodoList(listData, todoList);
 
         return newList;
     }
 
-    function attachEventListeners(todoListData, titleInput, saveButton, addButton, todoInput, todoTime, todoList, listTitle, listElement) {
+    function attachEventListeners(todoListData, titleInput, saveButton, addButton, todoInput, todoTime, todoList, listTitle, closeButton, listElement) {
         saveButton.addEventListener('click', () => {
             const listTitleText = titleInput.value.trim();
             if (listTitleText) {
@@ -91,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Attach event listener for the close button
-        listElement.querySelector('.close-todo-container').addEventListener('click', () => {
+        closeButton.addEventListener('click', () => {
             todoListContainer.removeChild(listElement); // Remove the todo list container from the DOM
             allTodoLists = allTodoLists.filter(list => list.id !== todoListData.id); // Remove from the data array
             saveAllListsToLocalStorage(); // Save updated data to local storage
@@ -99,29 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function addTodo(todoListData, todoInput, todoTime, todoList) {
-    const taskText = todoInput.value.trim();
-    const taskTime = todoTime.value;
+        const taskText = todoInput.value.trim();
+        const taskTime = todoTime.value;
 
-    if (taskText === '') return;
+        if (taskText === '') return;
 
-    const formattedTime = formatTime(taskTime);
+        const formattedTime = formatTime(taskTime);
 
-    const task = {
-        text: taskText,
-        time: taskTime,
-        formattedTime: formattedTime,
-        checked: false
-    };
+        const task = {
+            text: taskText,
+            time: taskTime,
+            formattedTime: formattedTime,
+            checked: false
+        };
 
-    todoListData.tasks.push(task);
-    updateTodoList(todoListData, todoList);
-    
-    // Auto-save after adding a new task
-    saveAllListsToLocalStorage();
+        todoListData.tasks.push(task);
+        updateTodoList(todoListData, todoList);
+        
+        // Auto-save after adding a new task
+        saveAllListsToLocalStorage();
 
-    todoInput.value = '';
-    todoTime.value = '';
-}
+        todoInput.value = '';
+        todoTime.value = '';
+    }
 
     function updateTodoList(todoListData, todoList) {
         todoList.innerHTML = '';
