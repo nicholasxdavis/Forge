@@ -524,7 +524,68 @@ body.dark-mode .share-text {
     <script src="js/script.js"></script>
     <script src="js/names.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            function redirectToHome() {
+            window.location.href = "index.html";
+        } 
+       function toggleMobileMenu() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            const overlay = document.getElementById('overlay');
+
+            if (mobileNav.classList.contains('menu-open')) {
+                mobileNav.classList.remove('menu-open');
+                menuList.classList.remove('menu-open');
+                overlay.style.display = 'none';
+            } else {
+                mobileNav.classList.add('menu-open');
+                menuList.classList.add('menu-open');
+                overlay.style.display = 'block';
+            }
+        }
+
+        // Hide the menu and overlay when clicking on the overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            const mobileNav = document.querySelector('nav.mobile-nav');
+            const menuList = mobileNav.querySelector('ul');
+            mobileNav.classList.remove('menu-open');
+            menuList.classList.remove('menu-open');
+            this.style.display = 'none';
+        });
+
+    </script>
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const resizeImages = () => {
+        // Select all profile images
+        const profileImages = document.querySelectorAll('.twitter-profile img, .instagram-profile img, .facebook-profile img');
+
+        // Loop through each image and apply styles
+        profileImages.forEach(img => {
+            img.style.objectFit = 'cover';
+            img.style.width = '50px';  // Make image take full width of the container
+            img.style.height = '50px'; // Make image take full height of the container
+        });
+    };
+
+    // Call the resize function on page load
+    resizeImages();
+
+    // Optionally call the function again if images are updated dynamically
+    // e.g., if images are uploaded or changed
+    document.getElementById('upload').addEventListener('change', (event) => {
+        // Wait for the image to be loaded
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Update the image source with the uploaded file
+            const newImg = document.getElementById('twitter-img'); // Adjust this ID based on your needs
+            newImg.src = e.target.result;
+            newImg.onload = resizeImages; // Call resizeImages when the new image is loaded
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+});
+
         function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function () {
