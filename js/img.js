@@ -22,15 +22,107 @@ function hidePopup() {
 
 // Function to convert file to blob based on selected type
 async function convertFileToBlob(file, conversionType) {
-    if (conversionType === 'png') {
+    if (file.type === 'image/svg+xml') {
+        return convertSVGToImage(file, conversionType);
+    } else if (conversionType === 'png') {
         return convertImageToPNG(file);
+    } else if (conversionType === 'avif' || conversionType === 'jpeg' || conversionType === 'webp' || 
+               conversionType === 'bmp' || conversionType === 'gif') {
+        return convertImageToFormat(file, conversionType);
     }
-    // Add more conversion types as needed
     return new Blob([file], { type: file.type }); // Default case: return original file as blob
 }
 
-// Function to convert an image file to PNG using canvas
-function convertImageToPNG(file) {
+// Function to convert an SVG file to different image formats using canvas
+function convertSVGToImage(file, conversionType) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const svgData = event.target.result;
+            const img = new Image();
+
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width || img.naturalWidth;
+                canvas.height = img.height || img.naturalHeight;
+                const ctx = canvas.getContext('2d');
+
+                // Clear the canvas before drawing the image, ensuring transparency is preserved
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+
+                let mimeType;
+                let backgroundColor = null;
+
+                switch (conversionType) {
+                    case 'png':
+                        mimeType = 'image/png';
+                        break;
+                    case 'jpeg':
+                        mimeType = 'image/jpeg';
+                        backgroundColor = 'white'; // JPEG doesn't support transparency
+                        break;
+                    case 'webp':
+                        mimeType = 'image/webp';
+                        break;
+                    case 'bmp':
+                        mimeType = 'image/bmp';
+                        backgroundColor = 'white'; // BMP might not fully support transparency
+                        break;
+                    case 'gif':
+                        mimeType = 'image/gif';
+                        break;
+                    case 'avif':
+                        mimeType = 'image/avif';
+                        break;
+                    case 'tiff':
+                        mimeType = 'image/tiff'; // TIFF not supported by canvas; requires additional handling
+                        break;
+                    default:
+                        mimeType = 'image/png'; // Default to PNG
+                }
+
+                // If the target format doesn't support transparency, fill the canvas with the background color
+                if (backgroundColor) {
+                    ctx.globalCompositeOperation = 'destination-over';
+                    ctx.fillStyle = backgroundColor;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        resolve(blob);
+                    } else {
+                        reject(new Error(`Failed to convert SVG to ${conversionType}`));
+                    }
+                }, mimeType);
+            };
+
+            img.onerror = function() {
+                reject(new Error('Failed to load SVG as an image.'));
+            };
+
+            const blob = new Blob([svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            img.src = url;
+
+            // Cleanup the object URL after image loads
+            img.onloadend = function() {
+                URL.revokeObjectURL(url);
+            };
+        };
+
+        reader.onerror = function() {
+            reject(new Error('Failed to read the SVG file.'));
+        };
+
+        reader.readAsText(file);
+    });
+}
+
+// Function to convert an image to a different format using canvas
+function convertImageToFormat(file, conversionType) {
     return new Promise((resolve, reject) => {
         const img = new Image();
         const reader = new FileReader();
@@ -48,10 +140,54 @@ function convertImageToPNG(file) {
             canvas.width = img.width;
             canvas.height = img.height;
             const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas to preserve transparency
             ctx.drawImage(img, 0, 0);
+
+            let mimeType;
+            let backgroundColor = null;
+
+            switch (conversionType) {
+                case 'png':
+                    mimeType = 'image/png';
+                    break;
+                case 'jpeg':
+                    mimeType = 'image/jpeg';
+                    backgroundColor = 'white'; // JPEG doesn't support transparency
+                    break;
+                case 'webp':
+                    mimeType = 'image/webp';
+                    break;
+                case 'bmp':
+                    mimeType = 'image/bmp';
+                    backgroundColor = 'white'; // BMP might not fully support transparency
+                    break;
+                case 'gif':
+                    mimeType = 'image/gif';
+                    break;
+                case 'avif':
+                    mimeType = 'image/avif';
+                    break;
+                case 'tiff':
+                    mimeType = 'image/tiff'; // TIFF not supported by canvas; requires additional handling
+                    break;
+                default:
+                    mimeType = 'image/png'; // Default to PNG
+            }
+
+            // If the target format doesn't support transparency, fill the canvas with the background color
+            if (backgroundColor) {
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = backgroundColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
             canvas.toBlob((blob) => {
-                resolve(blob);
-            }, 'image/png');
+                if (blob) {
+                    resolve(blob);
+                } else {
+                    reject(new Error(`Failed to convert image to ${conversionType}`));
+                }
+            }, mimeType);
         };
 
         reader.readAsDataURL(file);
@@ -112,11 +248,13 @@ async function handleBatchConversion(files, conversionType) {
 function changeFileExtension(filename, conversionType) {
     const extensionMap = {
         png: '.png',
+        svg: '.svg',
         jpeg: '.jpeg',
         gif: '.gif',
         bmp: '.bmp',
         tiff: '.tiff',
         webp: '.webp',
+        avif: '.avif',
     };
     const newExtension = extensionMap[conversionType] || '';
     return filename.replace(/\.[^/.]+$/, newExtension);
