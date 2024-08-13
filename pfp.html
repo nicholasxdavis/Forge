@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFP - Forge by Blacnova</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    <link rel="icon" href="img/logo.png" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/gen.css">
+    <style> 
+body.dark-mode .instagram-stats span {
+    color: #fff; /* White text color for stats */
+}
+
+body.dark-mode .instagram-stats b {
+    color: #fff; /* White text color for bold stats */
+}
+body.dark-mode .upload-section {
+    color: #f1f1f1; /* Light text color */
+}
+
+body.dark-mode label[for="upload"] {
+    background-color: #2980b9; /* Darker blue for dark mode */
+}
+
+body.dark-mode label[for="upload"]:hover {
+    background-color: #1c5d9d; /* Even darker blue for hover */
+}
+
+body.dark-mode .preview-container {
+    color: #fff; /* Light text color */
+}
+
+body.dark-mode .preview-card {
+    background-color: #444; /* Darker background for preview cards */
+    border: 1px solid #555; /* Darker border */
+    color: #f1f1f1; /* Light text color */
+}
+
+body.dark-mode .twitter-profile {
+    background-color: #333; /* Darker background for Twitter profiles */
+    border: 1px solid #555; /* Darker border */
+}
+
+body.dark-mode .instagram-profile {
+    background-color: #333; /* Darker background for Instagram profiles */
+    border: 1px solid #555; /* Darker border */
+}
+
+body.dark-mode .facebook-profile {
+    background-color: #333; /* Darker background for Facebook profiles */
+    border: 1px solid #555; /* Darker border */
+}
+
+body.dark-mode .twitter-name,
+body.dark-mode .twitter-handle,
+body.dark-mode .instagram-name,
+body.dark-mode .instagram-handle,
+body.dark-mode .facebook-name {
+    color: #fff; /* Light text color */
+}
+
+body.dark-mode .twitter-stats span,
+body.dark-mode .instagram-stats span,
+body.dark-mode .facebook-stats span {
+    color: #fff; /* Lighter grey text color */
+}
+
+body.dark-mode .download-button {
+    background-color: #2980b9; /* Darker blue for the download button */
+}
+
+body.dark-mode .download-button:hover {
+    background-color: #1c5d9d; /* Even darker blue for hover */
+}
+
+body.dark-mode .popup {
+    background-color: rgba(0,0,0,0.8); /* Darker background for the popup */
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Darker background for popup content */
+    color: #fff; /* Light text color for dark mode */
+}
+
+body.dark-mode .close-button {
+    background-color: #444; /* Darker button color */
+}
+
+body.dark-mode .close-button:hover {
+    background-color: #333; /* Even darker button color on hover */
+}
+        .container {
+    text-align: center;
+}
+
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label[for="upload"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+label[for="upload"]:hover {
+    background-color: #2980b9;
+}
+
+.preview-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: nowrap; /* Ensure all cards stay in one row */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    max-width: 100%; /* Allow the container to fit within the viewport */
+    width: 100%;
+}
+
+.preview-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ddd; /* Outline only, no shadow */
+    width: 250px; /* Fixed width to ensure cards are in a row */
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 10px; /* Ensure space below cards */
+}
+
+/* Twitter Styles */
+.twitter-profile {
+    border: 1px solid #e1e8ed;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    background-color: #f5f8fa;
+}
+
+.twitter-profile img {
+    padding-bottom: ;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.twitter-details {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.twitter-name {
+    font-weight: bold;
+    color: #14171a;
+}
+
+.twitter-handle {
+    color: #657786;
+}
+
+/* Instagram Styles */
+.instagram-profile {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    background-color: #f5f8fa;
+}
+
+.instagram-profile img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    border: 2px solid #dbdbdb;
+}
+
+.instagram-name {
+    font-weight: bold;
+    color: #262626;
+}
+
+.instagram-handle {
+    color: #8e8e8e;
+    font-size: 0.9rem;
+}
+
+/* Facebook Styles */
+.facebook-profile {
+    background-color: #fff;
+    padding: 15px;
+    text-align: left;
+    border-radius: 10px;
+    border: 1px solid #dfe3ee;
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    background-color: #f5f8fa;
+}
+
+.facebook-profile img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.facebook-details {
+    display: flex;
+    flex-direction: column; /* Arrange name and stats vertically */
+    justify-content: center;
+}
+
+.facebook-name {
+    font-weight: bold;
+    color: #1c1e21;
+}
+
+.facebook-stats {
+    font-weight: normal;
+    color: grey;
+    font-size: 0.9em;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .preview-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Space between cards */
+    }
+
+    .preview-card {
+        width: 100%; /* Make cards full width on small screens */
+        max-width: 500px; /* Optional: Restrict maximum width on small screens */
+    }
+}
+
+        .twitter-stats, .instagram-stats, .facebook-stats {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+        .twitter-stats span, .instagram-stats span, .facebook-stats span {
+            font-weight: normal;
+            color: black;
+            font-size: 0.9em;
+        }
+        .twitter-stats b, .instagram-stats b {
+            font-weight: bold;
+        }
+        .instagram-stats b {
+            color: black;
+        }
+        .facebook-stats {
+            font-weight: bold;
+            color: black;
+        }
+        .facebook-stats span {
+            font-weight: normal;
+            color: grey;
+            font-size: 0.9em;
+        }
+        /* Download Button Styles */
+        .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust if needed */
+}
+       .download-button {
+    display: none; /* Hide the button by default */
+    margin-top: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    font-size: 1em;
+}
+        .download-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head> 
+<body>
+    <style> 
+     .popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Could be more or less, depending on screen size */
+    height: 150px;
+    border-radius: 15px; /* Rounded corners */
+    display: flex; /* Added to use flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+
+body.dark-mode .popup {
+    background-color: rgba(0,0,0,0.8); /* Darker background for dark mode */
+}
+
+body.dark-mode .popup-content {
+    background-color: #333; /* Darker background for content */
+    color: #f1f1f1; /* Light text color for dark mode */
+}
+
+.close-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Add some space above the button */
+}
+
+body.dark-mode .close-button {
+    background-color: #444;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}
+.intro-container {
+    padding-bottom: 15px;
+}
+
+    </style>
+    <div id="popup" class="popup">
+            <div class="popup-content">
+                <div id="message-sent">Your message has been sent successfully!</div>
+                <button class="close-button" id="close-popup">Close</button>
+            </div>
+        </div>
+    <div id="overlay" class="overlay"></div>
+    <header>
+        <img src="img/1logo.svg" alt="Forge by Blacnova Icon" onclick="redirectToHome()">
+        <img src="img/menu.svg" alt="Menu Icon" class="menu-icon" onclick="toggleMobileMenu()">
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">Tools</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html" class="active">Our Tools</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">
+            <img id="theme-icon" src="img/light.svg" alt="Light Mode Icon">
+        </button>
+    </header>
+    <main>
+        <section id="introduction">
+            <div class="intro-container">
+                <h2>PFP Previewer</h2>
+                <p>Instantly Preview Your Profile Pictures across various social media platforms.</p>
+            </div>
+        </section>
+                        <div class="container">
+        <div class="upload-section">
+            <input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+            <label for="upload">Upload Profile Picture</label>
+        </div>
+    </div>
+        <div class="preview-container">
+            <div class="preview-card">
+                <h3>X (Twitter) Preview</h3>
+                <div class="twitter-profile">
+                    <img id="twitter-img" src="img/exampleicon.png" alt="Twitter Profile Picture">
+                    <div class="twitter-details">
+                        <span class="twitter-name">Example</span>
+                        <span class="twitter-handle">@example</span>
+                        <p class="twitter-bio">Creativity doesn’t just open doors. It opens worlds.</p>
+                        <div class="twitter-stats">
+                            <span><b>221</b> Following</span>
+                            <span><b>965.9K</b> Followers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-card">
+                <h3>Instagram Preview</h3>
+                <div class="instagram-profile">
+                    <img id="instagram-img" src="img/exampleicon.png" alt="Instagram Profile Picture">
+                    <div class="instagram-details">
+                        <span class="instagram-name">Example</span>
+                        <p class="instagram-bio">Creativity doesn’t just open doors, it opens worlds.</p>
+                        <div class="instagram-stats">
+                            <span><b>3,602</b> posts</span>
+                            <span><b>1.9M</b> followers</span>
+                            <span><b>62</b> following</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-card">
+                <h3>Facebook Preview</h3>
+                <div class="facebook-profile">
+                    <img id="facebook-img" src="img/exampleicon.png" alt="Facebook Profile Picture">
+                    <div class="facebook-details">
+                        <span class="facebook-name">Example</span>
+                        <div class="facebook-stats">
+                            <span>1.9M likes • 2M followers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+    <button class="download-button" onclick="downloadCards()">Download Preview</button>
+</div>
+
+    </div>
+
+    </main>
+        <style>
+.share-section {
+    display: flex;
+    flex-direction: column; /* Stack the text and icons vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Space between the text and icons */
+    margin-top: 10px; /* Space above the section */
+}
+body.dark-mode .share-text {
+    color: #fff; /* Adjust color as needed */
+}
+.share-text {
+    padding-bottom: -10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+    font-size: 18px; /* Adjust as needed */
+    color: #333; /* Adjust color as needed */
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+.share-icon {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Adjust the size as needed */
+    text-decoration: none;
+        padding-bottom: 15px;
+}
+
+.share-icon:hover {
+    color: #2980b9; /* Darker blue on hover */
+}
+</style>
+<div class="share-section">
+            <p class="share-text">Share this page</p>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=YOUR_PAGE_URL" target="_blank" class="share-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="share-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <section id="footerprint">
+<p><em>Last Update:</em> <span style="color: #3498db;">8/12/2024</span>.</p>
+    </section>
+    <section id="footerprint">
+        <p>Thanks for choosing Blacnova's Forge!</p>
+    </section>
+        <div id="cookie-popup" class="cookie-popup">
+    <p>This website relies on cookies to ensure you get the best experience. <br><a href="privacypolicy.html">Learn more</a></p>
+    <button id="cookie-popup-btn">Ok!</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 Forge by <a href="https://blacnova.store" target="_blank">Blacnova</a>. All rights reserved.</p>
+        <p><a href="privacypolicy.html">Terms and Conditions & Privacy Policy</a></p>
+    </footer>
+</body>
+    <script src="js/popups.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/names.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function () {
+        // Set image sources
+        document.getElementById('twitter-img').src = reader.result;
+        document.getElementById('instagram-img').src = reader.result;
+        document.getElementById('facebook-img').src = reader.result;
+
+        // Show the download button
+        document.querySelector('.download-button').style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+
+        function downloadCards() {
+            html2canvas(document.querySelector('.preview-container'), { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'profile-previews.png';
+                link.click();
+            }).catch(err => console.error('Error generating image:', err));
+        }
+    </script>
+</html>
